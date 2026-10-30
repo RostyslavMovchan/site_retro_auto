@@ -30,6 +30,7 @@
   </script>
   <!-- Власні стилі бренду, календаря та вбудованих блоків. -->
   <link rel="stylesheet" href="styles.css">
+  <script src="assets/js/validation.js" defer></script>
 </head>
 <body class="font-sans antialiased min-h-screen">
   <a href="#main-content" class="skip-link">Перейти до основного вмісту</a>
@@ -288,25 +289,27 @@
       </div>
     </section>
 
-    <!-- 6. Заявка: без бекенду створюється лист. Дані залишаються у формі до надсилання користувачем. -->
+    <!-- ЛР 9. Доступна адаптивна форма з клієнтською перевіркою та демонстрацією успіху. -->
     <section id="booking" class="py-16 sm:py-24" aria-labelledby="booking-heading">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-start">
         <article><p class="eyebrow">Кожна історія починається з ідеї</p><h2 id="booking-heading" class="font-serif text-3xl sm:text-5xl mb-6">Підберемо авто під вашу подію</h2><p class="text-brand-muted leading-relaxed">Розкажіть про дату, локацію й настрій. Допоможемо обрати автомобіль та узгодити умови з його власником.</p><p class="text-sm text-brand-muted mt-6">Форма підготує лист на <a href="mailto:info@retroauto.lviv.ua" class="underline">info@retroauto.lviv.ua</a>. Його потрібно надіслати у власній поштовій програмі. Формування заявки ще не резервує автомобіль.</p></article>
-        <form id="booking-form" class="p-5 sm:p-8 rounded-2xl bg-brand-card border border-brand-border space-y-5">
-          <div class="grid sm:grid-cols-2 gap-5">
-            <div><label class="field-label" for="client-name">Ваше ім’я *</label><input class="field" id="client-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
-            <div><label class="field-label" for="client-contact">Телефон або email *</label><input class="field" id="client-contact" name="contact" type="text" autocomplete="email" maxlength="150" required></div>
+        <form id="booking-form" novalidate class="p-5 sm:p-8 rounded-2xl bg-brand-card border border-brand-border space-y-5">
+          <p class="text-sm text-brand-muted">Поля зі * обов’язкові. Дані перевіряються у браузері; лист ви надсилаєте самостійно.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div><label class="field-label" for="client-name">Ваше ім’я *</label><input class="field" id="client-name" name="name" type="text" autocomplete="name" minlength="2" maxlength="100" aria-describedby="client-name-error" aria-invalid="false" required><p id="client-name-error" class="field-feedback" aria-live="polite"></p></div>
+            <div><label class="field-label" for="client-email">Електронна пошта *</label><input class="field" id="client-email" name="email" type="email" autocomplete="email" maxlength="150" aria-describedby="client-email-error" aria-invalid="false" required><p id="client-email-error" class="field-feedback" aria-live="polite"></p></div>
+            <div><label class="field-label" for="client-phone">Телефон *</label><input class="field" id="client-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="32" placeholder="+380501234567" aria-describedby="client-phone-hint client-phone-error" aria-invalid="false" required><p id="client-phone-hint" class="text-xs text-brand-muted mt-2">+380 і 9 цифр без пробілів та дужок.</p><p id="client-phone-error" class="field-feedback" aria-live="polite"></p></div>
             <div><label class="field-label" for="car-select">Автомобіль</label><select class="field" id="car-select" name="car"><option value="">Потрібна допомога з підбором</option><option value="Ford Mustang 1967">Ford Mustang 1967</option>
 <option value="Dodge Charger 1969">Dodge Charger 1969</option>
 <option value="Volkswagen Beetle 1972">Volkswagen Beetle 1972</option>
 <option value="Mercedes-Benz 300 SL Gullwing 1954">Mercedes-Benz 300 SL Gullwing 1954</option>
 <option value="Jaguar E-Type Series 1 1961">Jaguar E-Type Series 1 1961</option>
 <option value="Rolls-Royce Silver Cloud III 1965">Rolls-Royce Silver Cloud III 1965</option></select></div>
-            <div><label class="field-label" for="booking-date">Дата оренди *</label><input class="field" id="booking-date" name="date" type="date" data-date-input required></div>
-            <div><label class="field-label" for="booking-duration">Тривалість, годин *</label><input class="field" id="booking-duration" name="duration" type="number" min="2" max="24" step="1" value="3" required></div>
+            <div><label class="field-label" for="booking-date">Дата оренди *</label><input class="field" id="booking-date" name="date" type="date" data-date-input required aria-describedby="booking-date-error" aria-invalid="false"><p id="booking-date-error" class="field-feedback" aria-live="polite"></p></div>
+            <div><label class="field-label" for="booking-duration">Тривалість, годин *</label><input class="field" id="booking-duration" name="duration" type="number" min="2" max="24" step="1" value="3" required aria-describedby="booking-duration-error" aria-invalid="false"><p id="booking-duration-error" class="field-feedback" aria-live="polite"></p></div>
           </div>
-          <div><label class="field-label" for="booking-comment">Локація, формат події та побажання</label><textarea class="field" id="booking-comment" name="comment" rows="3" maxlength="1500" placeholder="Весільна фотосесія, подача у центр Львова, потрібен водій…"></textarea></div>
-          <label class="flex items-start gap-3 text-sm text-brand-muted leading-relaxed"><input class="mt-1 w-5 h-5 accent-brand-emerald shrink-0" type="checkbox" name="consent" required><span>Погоджуюся на використання моїх контактів для відповіді на цей запит. <a href="#privacy" class="underline">Про обробку даних</a></span></label>
+          <div><label class="field-label" for="booking-comment">Локація, формат події та побажання *</label><textarea class="field" id="booking-comment" name="comment" rows="3" minlength="10" maxlength="1500" placeholder="Весільна фотосесія, подача у центр Львова, потрібен водій…" aria-describedby="booking-comment-error" aria-invalid="false" required></textarea><p id="booking-comment-error" class="field-feedback" aria-live="polite"></p></div>
+          <div><label for="booking-consent" class="flex items-start gap-3 text-sm text-brand-muted leading-relaxed"><input id="booking-consent" class="mt-1 w-5 h-5 accent-brand-emerald shrink-0" type="checkbox" name="consent" aria-describedby="booking-consent-error" aria-invalid="false" required><span>Погоджуюся на використання моїх контактів для відповіді на цей запит. *</span></label><a href="#privacy" class="inline-block mt-2 text-sm text-brand-muted underline">Про обробку даних</a><p id="booking-consent-error" class="field-feedback" aria-live="polite"></p></div>
           <button type="submit" class="btn-primary w-full">Сформувати заявку <span aria-hidden="true">↗</span></button>
           <p id="booking-status" role="status" aria-live="polite" class="text-sm text-brand-muted"></p>
           <section id="booking-preview" hidden aria-labelledby="booking-preview-heading" class="border-t border-brand-border pt-5">
@@ -464,6 +467,13 @@
   </div>
 
 
+
+  <dialog id="booking-success" aria-labelledby="booking-success-title" aria-describedby="booking-success-description" class="booking-success rounded-2xl border border-brand-border bg-brand-card text-brand-text p-6 sm:p-8">
+    <p class="eyebrow">Заявку підготовлено</p>
+    <h2 id="booking-success-title" class="font-serif text-2xl sm:text-3xl mb-4">Дякуємо за звернення!</h2>
+    <p id="booking-success-description" class="text-brand-muted leading-relaxed">Форма успішно пройшла перевірку. Це демонстрація успішного надсилання: дані не передавалися на сервер, автомобіль ще не заброньовано. Чернетка заявки доступна під формою — її можна надіслати зі своєї поштової програми.</p>
+    <button type="button" class="btn-primary w-full mt-6">Закрити</button>
+  </dialog>
 
   <script>
 
@@ -776,24 +786,22 @@
       const bookingPreview = document.getElementById('booking-preview');
       const bookingEmailLink = document.getElementById('booking-email-link');
       let bookingText = '';
-      bookingForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        if (!bookingForm.reportValidity()) return;
-        const fields = new FormData(bookingForm);
+      bookingForm.addEventListener('booking:validated', (event) => {
+        const fields = event.detail;
         bookingText = [
           'Заявка Retro Auto',
           `Авто: ${fields.get('car') || 'Потрібна допомога з підбором'}`,
           `Дата: ${fields.get('date')}`,
           `Тривалість: ${fields.get('duration')} год`,
           `Ім’я: ${fields.get('name')}`,
-          `Контакт: ${fields.get('contact')}`,
+          `Email: ${fields.get('email')}`,
+          `Телефон: ${fields.get('phone')}`,
           `Побажання: ${fields.get('comment') || 'Без додаткових побажань'}`
         ].join('\n');
         document.getElementById('booking-summary').textContent = bookingText;
         bookingEmailLink.href = `mailto:info@retroauto.lviv.ua?subject=${encodeURIComponent('Підбір ретро-авто — Retro Auto')}&body=${encodeURIComponent(bookingText)}`;
         bookingPreview.hidden = false;
         document.getElementById('booking-status').textContent = 'Заявку сформовано. Перевірте її та натисніть «Відкрити лист». Надсилання відбувається у вашій поштовій програмі.';
-        bookingEmailLink.focus({ preventScroll: true });
       });
       document.getElementById('booking-copy').addEventListener('click', async () => {
         try {

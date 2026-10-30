@@ -8,6 +8,19 @@
       --color-border: rgba(229,231,235,0.14);
       --radius-card: 16px;
     }
+/* ЛР 9: стани полів мають текстове пояснення, а не лише колір. */
+.field-feedback { margin-top: 6px; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.field-feedback:empty { display: none; }
+.field-error { color: #FDA4AF; }
+.field-success { color: #6EE7B7; }
+.field.is-invalid { border-color: #FB7185; }
+.field.is-valid { border-color: #34D399; }
+#booking-consent.is-invalid { outline: 2px solid #FB7185; outline-offset: 3px; }
+.field:focus-visible { outline: 2px solid #6EE7B7; outline-offset: 3px; }
+.booking-success { width: min(540px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; margin: auto; }
+.booking-success::backdrop { background: rgba(0, 0, 0, .78); }
+.booking-success:not([open]) { display: none; }
+#booking-form button:disabled { opacity: .6; cursor: wait; }
 /* ==========================================================================
    CUSTOM STYLESHEET: "РЕТРО АВТО"
    Додаткові стилі бренду та календаря
