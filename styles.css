@@ -1,0 +1,366 @@
+    :root {
+      color-scheme: dark;
+      --color-bg: #0D0E10;
+      --color-surface: #1A1D24;
+      --color-accent: #10B981;
+      --color-text: #F3F4F6;
+      --color-muted: #B0B7C3;
+      --color-border: rgba(229,231,235,0.14);
+      --radius-card: 16px;
+    }
+/* ==========================================================================
+   CUSTOM STYLESHEET: "РЕТРО АВТО"
+   Додаткові стилі бренду та календаря
+   Дисципліна: Технології веб-розробки та дизайну (НУ «Львівська політехніка»)
+   Студент: Мовчан Р. С., група ПП-25
+   Стек: Tailwind CSS CDN + Custom Utility Styles + WCAG 2.2 AA
+   ========================================================================== */
+
+/* 1. Плавний скролінг та оптимізація відображення */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #0d0e10;
+  color: #f9fafb;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* 2. Кастомні шрифтові правила */
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 3. Індикатор фокусу доступності (WCAG 2.2 AA) */
+:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 3px;
+}
+
+/* 4. Підкреслення активного пункту навігації (ScrollSpy) */
+.nav-link {
+  position: relative;
+  transition: color 150ms ease-in-out;
+}
+
+.nav-link.active {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #10b981;
+  border-radius: 9999px;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
+  animation: fadeInLine 200ms ease-out forwards;
+}
+
+@keyframes fadeInLine {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* 5. Кастомний скролбар для темної теми */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0e10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f242d;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+/* 6. Анімація пульсації форми при автоматичному переході з калькулятора */
+@keyframes formPulseHighlight {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 35px 8px rgba(16, 185, 129, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.form-highlight-pulse {
+  animation: formPulseHighlight 1.8s ease-out;
+  border-color: #10b981 !important;
+}
+
+/* 7. Стилізація повзунка (range slider) у калькуляторі */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #10b981;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  transition: transform 150ms ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* 8. Смарагдова підкладка швидких віджетів */
+#hero-widget-calendar,
+#hero-widget-booking,
+#hero-widget-calculator {
+  background-color: rgba(16, 185, 129, 0.09);
+  border-color: rgba(16, 185, 129, 0.12);
+}
+
+#hero-widget-calendar:hover,
+#hero-widget-booking:hover,
+#hero-widget-calculator:hover {
+  background-color: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* 9. Календар найближчих дат */
+.calendar-panel {
+  width: 100%;
+  max-width: 680px;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  padding: 32px 36px;
+  border: 1px solid rgba(229, 231, 235, 0.2);
+  border-radius: 24px;
+  background: linear-gradient(155deg, #1e2228, #121519);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65), 0 0 45px rgba(16, 185, 129, 0.06);
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.12);
+}
+
+.calendar-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.calendar-header h3 i { color: #10b981; font-size: 26px; }
+.calendar-close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(229, 231, 235, 0.06);
+  color: #9ca3af;
+  font-size: 22px;
+  transition: background 150ms, color 150ms;
+}
+.calendar-close:hover { background: rgba(229, 231, 235, 0.12); color: #f9fafb; }
+.calendar-intro { margin: 26px 0 20px; color: #b2b8c2; font-size: 14px; line-height: 1.6; }
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  color: #b2b8c2;
+  font-size: 13px;
+}
+.calendar-legend li { display: inline-flex; align-items: center; gap: 6px; }
+.calendar-dot { width: 10px; height: 10px; flex-shrink: 0; border-radius: 50%; background: #10b981; }
+.calendar-dot--reserved { background: #f59e0b; }
+.calendar-dot--busy { background: #ef4444; }
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  max-height: 282px;
+  overflow-y: auto;
+  padding: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #434b53 #121519;
+}
+.calendar-day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 90px;
+  padding: 12px 6px;
+  border: 1px solid rgba(229, 231, 235, 0.12);
+  border-radius: 10px;
+  background: #111417;
+  color: #b2b8c2;
+  font-size: 13px;
+  transition: border-color 150ms, background 150ms, box-shadow 150ms;
+}
+.calendar-day-date { color: #e5e7eb; font-size: 14px; font-weight: 700; }
+.calendar-day-state { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; }
+.calendar-day-state i { color: #10b981; font-size: 11px; }
+.calendar-day:not(:disabled):hover { border-color: #10b981; background: rgba(16, 185, 129, 0.08); }
+.calendar-day[aria-pressed="true"] { border-color: #10b981; background: rgba(16, 185, 129, 0.14); box-shadow: inset 0 0 0 1px #10b981; }
+.calendar-day[aria-pressed="true"] .calendar-day-date { color: #34d399; }
+.calendar-day:disabled { cursor: not-allowed; background: rgba(17, 20, 23, 0.45); color: #858d99; border-color: rgba(229, 231, 235, 0.05); }
+.calendar-day:disabled .calendar-day-date { color: #858d99; }
+.calendar-day[data-status="reserved"] .calendar-day-state i { color: #f59e0b; }
+.calendar-day[data-status="busy"] .calendar-day-state i { color: #ef4444; }
+.calendar-demo-note { margin: 12px 0 24px; color: #9ca3af; font-size: 12px; line-height: 1.5; }
+.calendar-custom-date label { display: block; margin-bottom: 10px; color: #b2b8c2; font-size: 14px; }
+.calendar-custom-date input {
+  width: 100%;
+  min-width: 0;
+  height: 56px;
+  padding: 12px 16px;
+  border: 1px solid rgba(229, 231, 235, 0.15);
+  border-radius: 10px;
+  background: #111417;
+  color: #f9fafb;
+  color-scheme: dark;
+  font: inherit;
+}
+.calendar-custom-date input:focus { border-color: #10b981; }
+.calendar-custom-date input[aria-invalid="true"] { border-color: #ef4444; }
+.calendar-selection-status { min-height: 36px; margin: 12px 0 14px; color: #b2b8c2; font-size: 12px; line-height: 1.5; }
+.calendar-selection-status.is-error { color: #fca5a5; }
+.calendar-apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: #10b981;
+  color: #0d0e10;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  transition: background 150ms, box-shadow 150ms;
+}
+.calendar-apply:hover { background: #34d399; box-shadow: 0 0 24px rgba(16, 185, 129, 0.18); }
+@media (min-width: 541px) and (max-height: 800px) {
+  .calendar-panel { padding: 24px 32px; }
+  .calendar-header { padding-bottom: 18px; }
+  .calendar-intro { margin: 18px 0 14px; }
+  .calendar-legend { margin-bottom: 14px; }
+  .calendar-days { max-height: 240px; }
+  .calendar-day { min-height: 76px; padding-block: 8px; gap: 4px; }
+  .calendar-demo-note { margin: 10px 0 18px; }
+  .calendar-selection-status { min-height: 18px; margin: 10px 0 12px; }
+}
+@media (max-width: 540px) {
+  .calendar-panel { padding: 22px 18px; border-radius: 20px; }
+  .calendar-header { gap: 10px; padding-bottom: 18px; }
+  .calendar-header h3 { font-size: 22px; gap: 10px; }
+  .calendar-header h3 i { font-size: 22px; }
+  .calendar-days { grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: 270px; }
+  .calendar-legend { gap: 10px 12px; font-size: 12px; }
+  .calendar-intro { margin-top: 20px; }
+  .calendar-apply { font-size: 13px; }
+}
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--color-bg); color: var(--color-text); }
+    img, iframe { max-width: 100%; }
+    img { display: block; }
+    main, section, article, aside, form, figure { min-width: 0; }
+    p, h1, h2, h3, a { overflow-wrap: break-word; }
+    section[id], footer[id] { scroll-margin-top: 100px; }
+    button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+    button:disabled { cursor: not-allowed; }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid #34D399; outline-offset: 4px; }
+    .skip-link { position: fixed; top: 8px; left: 12px; z-index: 100; padding: 12px 18px; background: var(--color-accent); color: var(--color-bg); transform: translateY(-160%); border-radius: 8px; }
+    .skip-link:focus { transform: translateY(0); }
+    .btn-primary, .btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 22px; border-radius: 10px; font-weight: 600; line-height: 1.5; text-align: center; }
+    .btn-primary { background: var(--color-accent); color: var(--color-bg); }
+    .btn-primary:hover { background: #34D399; }
+    .btn-secondary { border: 1px solid var(--color-border); background: #1A1D24; color: var(--color-text); }
+    .btn-secondary:hover { border-color: var(--color-accent); }
+    .eyebrow { color: #34D399; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .18em; margin-bottom: 16px; }
+    .field { display: block; width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var(--color-border); border-radius: 10px; background: #121417; color: var(--color-text); font: inherit; }
+    .field:focus { border-color: var(--color-accent); }
+    .field-label { display: block; margin-bottom: 8px; color: var(--color-muted); font-size: 14px; }
+    .car-card { transition: border-color 180ms, transform 180ms; }
+    .car-card:hover { border-color: rgba(16,185,129,.5); transform: translateY(-4px); }
+    /* Responsive iframe wrappers reserve space before remote content loads, preventing layout shifts. */
+    .video-frame { aspect-ratio: 16 / 9; }
+    .map-frame { height: 380px; min-height: 0; flex: none; }
+    .video-frame iframe, .map-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+    #mobile-menu-btn { min-width: 44px; min-height: 44px; }
+    #calendar-modal, #calculator-modal { z-index: 70; }
+    #calculator-modal > div { max-height: calc(100dvh - 32px); overflow-y: auto; }
+    #booking-summary { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .calendar-day:disabled, .calendar-day:disabled .calendar-day-date { color: #A9B0BB; }
+    .hero-background-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .55;
+      pointer-events: none;
+    }
+    .hero-video-toggle {
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      background: rgba(13, 14, 16, .85);
+      color: var(--color-text);
+      font-size: 12px;
+    }
+    .hero-video-toggle:hover { border-color: var(--color-accent); }
+    #hero > .relative { padding-bottom: 80px; }
+    @media (max-width: 639px) { .map-frame { height: 300px; } }
+    @media (max-width: 639px) { input, select, textarea { font-size: 16px !important; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
