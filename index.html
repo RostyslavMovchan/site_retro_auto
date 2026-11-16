@@ -29,8 +29,13 @@
     };
   </script>
   <!-- Власні стилі бренду, календаря та вбудованих блоків. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
   <link rel="stylesheet" href="styles.css">
   <script src="assets/js/validation.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" defer></script>
+  <script src="assets/js/gallery.js" defer></script>
 </head>
 <body class="font-sans antialiased min-h-screen">
   <a href="#main-content" class="skip-link">Перейти до основного вмісту</a>
@@ -256,6 +261,60 @@
       </div>
     </section>
 
+    <section id="gallery" class="py-16 sm:py-24 border-b border-brand-border" aria-labelledby="gallery-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="gallery-heading" class="font-serif text-3xl sm:text-5xl mb-4">Фотогалерея автопарку</h2>
+        <p class="text-brand-muted mb-8">Гортайте добірку й відкривайте фото, щоб роздивитися деталі.</p>
+        <div class="swiper gallery-frame">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <a class="gallery-photo" href="assets/images/mustang-1967.jpg" data-fancybox="retro-fleet" data-caption="Ford Mustang 1967">
+                <img src="assets/images/mustang-1967.jpg" alt="" loading="lazy" decoding="async">
+                <span>Ford Mustang 1967</span>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a class="gallery-photo" href="assets/images/charger-1969.jpg" data-fancybox="retro-fleet" data-caption="Dodge Charger 1969">
+                <img src="assets/images/charger-1969.jpg" alt="" loading="lazy" decoding="async">
+                <span>Dodge Charger 1969</span>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a class="gallery-photo" href="assets/images/beetle-1972.jpg" data-fancybox="retro-fleet" data-caption="Volkswagen Beetle 1972">
+                <img src="assets/images/beetle-1972.jpg" alt="" loading="lazy" decoding="async">
+                <span>Volkswagen Beetle 1972</span>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a class="gallery-photo" href="assets/images/mercedes-300sl-1954.jpg" data-fancybox="retro-fleet" data-caption="Mercedes-Benz 300 SL 1954">
+                <img src="assets/images/mercedes-300sl-1954.jpg" alt="" loading="lazy" decoding="async">
+                <span>Mercedes-Benz 300 SL 1954</span>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a class="gallery-photo" href="assets/images/jaguar-etype-1961.jpg" data-fancybox="retro-fleet" data-caption="Jaguar E-Type 1961">
+                <img src="assets/images/jaguar-etype-1961.jpg" alt="" loading="lazy" decoding="async">
+                <span>Jaguar E-Type 1961</span>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a class="gallery-photo" href="assets/images/rolls-royce-1965.jpg" data-fancybox="retro-fleet" data-caption="Rolls-Royce Silver Cloud 1965">
+                <img src="assets/images/rolls-royce-1965.jpg" alt="" loading="lazy" decoding="async">
+                <span>Rolls-Royce Silver Cloud 1965</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-controls" hidden>
+          <button class="gallery-prev" type="button" aria-label="Попереднє фото">‹</button>
+          <div class="gallery-pagination" role="group" aria-label="Перейти до фото"></div>
+          <button class="gallery-next" type="button" aria-label="Наступне фото">›</button>
+          <button class="gallery-toggle" type="button">Зупинити автопрокрутку</button>
+        </div>
+      </div>
+    </section>
+
+
     <!-- 5. P2P-сценарій: запит → узгодження з власником → передача автомобіля. -->
     <section id="how-it-works" class="py-16 sm:py-24" aria-labelledby="steps-heading">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -368,7 +427,7 @@
   <!-- 7. Підвал: контакти, внутрішні правила та зовнішні посилання з noopener. -->
   <footer class="bg-brand-secondary border-t border-brand-border py-10"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-8 justify-between">
     <div><a href="#hero" class="inline-flex items-center gap-3 font-serif text-xl"><img src="assets/images/Logo-white.svg" alt="" width="64" height="32" class="w-16 h-8 object-contain">Retro Auto</a><p class="mt-4 text-sm text-brand-muted">Класика від власників. Історії для вас.</p><p class="text-xs text-brand-muted mt-4">© 2026 Retro Auto. Усі права захищено.</p></div>
-    <nav aria-label="Додаткові посилання" class="flex flex-col gap-3 text-sm text-brand-muted"><a href="#fleet">Автопарк</a><a href="#rental-terms">Правила оренди</a><a href="#privacy">Обробка даних</a><a href="mailto:info@retroauto.lviv.ua">info@retroauto.lviv.ua</a></nav>
+    <nav aria-label="Додаткові посилання" class="flex flex-col gap-3 text-sm text-brand-muted"><a href="#fleet">Автопарк</a><a href="#gallery">Фотогалерея</a><a href="#rental-terms">Правила оренди</a><a href="#privacy">Обробка даних</a><a href="mailto:info@retroauto.lviv.ua">info@retroauto.lviv.ua</a></nav>
     <nav aria-label="Соціальні мережі" class="flex gap-3 items-start"><a class="btn-secondary" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Відкрити Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a><a class="btn-secondary" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Відкрити Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a><a class="btn-secondary" href="https://t.me/" target="_blank" rel="noopener noreferrer" aria-label="Відкрити Telegram"><i class="fa-brands fa-telegram" aria-hidden="true"></i></a></nav>
   </div></footer>
 

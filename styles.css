@@ -377,3 +377,81 @@ input[type="range"]::-webkit-slider-thumb:hover {
       html { scroll-behavior: auto !important; }
       *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     }
+
+/* ЛР 10: фотогалерея. Сітка доступна й без скриптів CDN. */
+#gallery { scroll-margin-top: 6rem; }
+.gallery-frame { min-width: 0; }
+.gallery-frame:not(.swiper-initialized) .swiper-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+.gallery-photo {
+  display: block;
+  padding: 4px;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  text-decoration: none;
+}
+.gallery-photo:focus-visible { outline-offset: -3px; }
+.gallery-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.gallery-photo span {
+  display: block;
+  padding: .85rem .75rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.gallery-controls:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  margin-top: 1.25rem;
+}
+.gallery-controls button:not(.swiper-pagination-bullet) {
+  min-height: 44px;
+  min-width: 44px;
+  padding: .45rem .85rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+.gallery-controls button:hover { border-color: var(--color-accent); }
+.gallery-controls .gallery-pagination {
+  display: flex;
+  position: static;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+.gallery-pagination .swiper-pagination-bullet {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 44px;
+  margin: 0;
+  background: transparent;
+  opacity: 1;
+}
+.gallery-pagination .swiper-pagination-bullet::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-muted);
+}
+.gallery-pagination .swiper-pagination-bullet-active::before {
+  width: 12px;
+  height: 12px;
+  background: var(--color-accent);
+}
