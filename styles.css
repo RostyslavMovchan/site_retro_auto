@@ -427,14 +427,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
   border-radius: 12px;
 }
 .gallery-controls button:hover { border-color: var(--color-accent); }
-.gallery-controls .gallery-pagination {
+/* Swiper loads near the gallery and adds its own full-width pagination rule. */
+.gallery-controls > .gallery-pagination.swiper-pagination-horizontal {
   display: flex;
   position: static;
   align-items: center;
   justify-content: center;
   width: auto;
 }
-.gallery-pagination .swiper-pagination-bullet {
+.gallery-controls > .gallery-pagination.swiper-pagination-horizontal .swiper-pagination-bullet {
   display: grid;
   place-items: center;
   width: 24px;
