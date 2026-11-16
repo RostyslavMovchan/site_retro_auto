@@ -10,6 +10,7 @@
   <link rel="preload" href="assets/images/hero-video-poster.webp" as="image" fetchpriority="high">
   <link rel="canonical" href="https://siteretroauto.vercel.app/">
   <link rel="stylesheet" href="assets/css/site.min.css">
+  <script src="assets/js/router.js" defer></script>
   <script src="assets/js/validation.js" defer></script>
   <script src="assets/js/gallery.js" defer></script>
   <script src="assets/js/widget.js" defer></script>
@@ -32,11 +33,10 @@
 
         <!-- Десктопне меню навігації (hidden lg:flex) -->
         <nav class="hidden lg:flex items-center gap-8" aria-label="Головна навігація сайту">
-          <a href="#hero" class="nav-link text-sm font-medium text-brand-muted hover:text-brand-emerald py-1 transition-colors duration-200 active">Головна</a>
-          <a href="#fleet" class="nav-link text-sm font-medium text-brand-muted hover:text-brand-emerald py-1 transition-colors duration-200">Автопарк</a>
-          <a href="#features" class="nav-link text-sm font-medium text-brand-muted hover:text-brand-emerald py-1 transition-colors duration-200">Переваги</a>
-          <a href="#how-it-works" class="nav-link text-sm font-medium text-brand-muted hover:text-brand-emerald py-1 transition-colors duration-200">Як це працює</a>
-          <a href="#contacts" class="nav-link text-sm font-medium text-brand-muted hover:text-brand-emerald py-1 transition-colors duration-200">Контакти</a>
+          <a href="#hero" data-view-link="home" class="nav-link text-sm font-medium text-brand-muted hover:text-brand-emerald py-1 transition-colors duration-200">Головна</a>
+          <a href="#fleet" data-view-link="fleet" class="nav-link text-sm font-medium text-brand-muted hover:text-brand-emerald py-1 transition-colors duration-200">Автопарк</a>
+          <a href="#about" data-view-link="about" class="nav-link text-sm font-medium text-brand-muted hover:text-brand-emerald py-1 transition-colors duration-200">Про сервіс</a>
+          <a href="#contacts" data-view-link="contacts" class="nav-link text-sm font-medium text-brand-muted hover:text-brand-emerald py-1 transition-colors duration-200">Контакти</a>
         </nav>
 
         <!-- CTA кнопка для десктопу (hidden lg:inline-flex) -->
@@ -60,11 +60,10 @@
     <!-- Мобільне меню (випадаючий блок для смартфонів) -->
     <div id="mobile-menu" class="hidden lg:hidden bg-brand-secondary border-b border-brand-border px-4 pt-2 pb-6 space-y-3 transition-all duration-300">
       <nav class="flex flex-col space-y-2" aria-label="Мобільна навігація">
-        <a href="#hero" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-text hover:bg-brand-card hover:text-brand-emerald transition-colors">Головна</a>
-        <a href="#fleet" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-muted hover:bg-brand-card hover:text-brand-emerald transition-colors">Автопарк</a>
-        <a href="#features" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-muted hover:bg-brand-card hover:text-brand-emerald transition-colors">Переваги</a>
-        <a href="#how-it-works" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-muted hover:bg-brand-card hover:text-brand-emerald transition-colors">Як це працює</a>
-        <a href="#contacts" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-muted hover:bg-brand-card hover:text-brand-emerald transition-colors">Контакти</a>
+        <a href="#hero" data-view-link="home" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-text hover:bg-brand-card hover:text-brand-emerald transition-colors">Головна</a>
+        <a href="#fleet" data-view-link="fleet" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-muted hover:bg-brand-card hover:text-brand-emerald transition-colors">Автопарк</a>
+        <a href="#about" data-view-link="about" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-muted hover:bg-brand-card hover:text-brand-emerald transition-colors">Про сервіс</a>
+        <a href="#contacts" data-view-link="contacts" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-brand-muted hover:bg-brand-card hover:text-brand-emerald transition-colors">Контакти</a>
       </nav>
       <div class="pt-2 border-t border-brand-border">
         <a href="#booking" class="mobile-nav-link w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brand-emerald hover:bg-brand-emerald-light text-brand-dark font-semibold text-center text-sm shadow-md transition-colors">
@@ -74,6 +73,7 @@
     </div>
   </header>
   <main id="main-content" class="pt-20" tabindex="-1">
+    <div data-view="home" data-title="Головна">
     <!-- 2. Єдиний H1 та головні CTA. Локальний відеофон без звуку плавно відтворюється по колу. -->
     <section id="hero" class="relative overflow-hidden border-b border-brand-border" aria-labelledby="hero-heading">
       <!-- Заставка — перший кадр цього ж відео: однакове кадрування забезпечує непомітний початок відтворення. -->
@@ -140,7 +140,9 @@
 </div>
       </div>
     </section>
+    </div>
 
+    <div data-view="fleet" data-title="Автопарк">
     <!-- 4. Каталог. Вартість орієнтовна: остаточний кошторис залежить від дати, маршруту й умов власника. -->
     <section id="fleet" class="py-16 sm:py-24 bg-brand-secondary border-y border-brand-border" aria-labelledby="fleet-heading">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -290,21 +292,9 @@
         </div>
       </div>
     </section>
+    </div>
 
-
-    <!-- 5. P2P-сценарій: запит → узгодження з власником → передача автомобіля. -->
-    <section id="how-it-works" class="py-16 sm:py-24" aria-labelledby="steps-heading">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p class="eyebrow">Від мрії до першого повороту ключа</p>
-        <h2 id="steps-heading" class="font-serif text-3xl sm:text-4xl mb-10">Як це працює</h2>
-        <ol class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <li class="border-t border-brand-border pt-6"><span class="text-brand-emerald-light font-serif text-3xl">01</span><h3 class="font-serif text-2xl mt-4 mb-3">Оберіть авто та дату</h3><p class="text-brand-muted leading-relaxed">Перегляньте каталог, розрахуйте орієнтовну вартість і залиште побажання до поїздки.</p></li>
-          <li class="border-t border-brand-border pt-6"><span class="text-brand-emerald-light font-serif text-3xl">02</span><h3 class="font-serif text-2xl mt-4 mb-3">Узгодьте деталі</h3><p class="text-brand-muted leading-relaxed">Власник підтвердить доступність, маршрут, страхування, заставу та фінальний кошторис.</p></li>
-          <li class="border-t border-brand-border pt-6"><span class="text-brand-emerald-light font-serif text-3xl">03</span><h3 class="font-serif text-2xl mt-4 mb-3">Збережіть цей момент</h3><p class="text-brand-muted leading-relaxed">Огляньте авто під час передачі, оформіть домовленості та вирушайте назустріч своїй історії.</p></li>
-        </ol>
-      </div>
-    </section>
-
+    <div data-view="about" data-title="Про сервіс">
     <!-- ================================================================
          ЛР №7 · ВБУДОВУВАННЯ YOUTUBE-ВІДЕО
          • Використовується /embed/VIDEO_ID, а не URL сторінки /watch.
@@ -325,38 +315,21 @@
       </div>
     </section>
 
-    <!-- ЛР 9. Доступна адаптивна форма з клієнтською перевіркою та демонстрацією успіху. -->
-    <section id="booking" class="py-16 sm:py-24" aria-labelledby="booking-heading">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-start">
-        <article><p class="eyebrow">Кожна історія починається з ідеї</p><h2 id="booking-heading" class="font-serif text-3xl sm:text-5xl mb-6">Підберемо авто під вашу подію</h2><p class="text-brand-muted leading-relaxed">Розкажіть про дату, локацію й настрій. Допоможемо обрати автомобіль та узгодити умови з його власником.</p><p class="text-sm text-brand-muted mt-6">Форма підготує лист на <a href="mailto:info@retroauto.lviv.ua" class="underline">info@retroauto.lviv.ua</a>. Його потрібно надіслати у власній поштовій програмі. Формування заявки ще не резервує автомобіль.</p></article>
-        <form id="booking-form" novalidate class="p-5 sm:p-8 rounded-2xl bg-brand-card border border-brand-border space-y-5">
-          <p class="text-sm text-brand-muted">Поля зі * обов’язкові. Дані перевіряються у браузері; лист ви надсилаєте самостійно.</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div><label class="field-label" for="client-name">Ваше ім’я *</label><input class="field" id="client-name" name="name" type="text" autocomplete="name" minlength="2" maxlength="100" aria-describedby="client-name-error" aria-invalid="false" required><p id="client-name-error" class="field-feedback" aria-live="polite"></p></div>
-            <div><label class="field-label" for="client-email">Електронна пошта *</label><input class="field" id="client-email" name="email" type="email" autocomplete="email" maxlength="150" aria-describedby="client-email-error" aria-invalid="false" required><p id="client-email-error" class="field-feedback" aria-live="polite"></p></div>
-            <div><label class="field-label" for="client-phone">Телефон *</label><input class="field" id="client-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="32" placeholder="+380501234567" aria-describedby="client-phone-hint client-phone-error" aria-invalid="false" required><p id="client-phone-hint" class="text-xs text-brand-muted mt-2">+380 і 9 цифр без пробілів та дужок.</p><p id="client-phone-error" class="field-feedback" aria-live="polite"></p></div>
-            <div><label class="field-label" for="car-select">Автомобіль</label><select class="field" id="car-select" name="car"><option value="">Потрібна допомога з підбором</option><option value="Ford Mustang 1967">Ford Mustang 1967</option>
-<option value="Dodge Charger 1969">Dodge Charger 1969</option>
-<option value="Volkswagen Beetle 1972">Volkswagen Beetle 1972</option>
-<option value="Mercedes-Benz 300 SL Gullwing 1954">Mercedes-Benz 300 SL Gullwing 1954</option>
-<option value="Jaguar E-Type Series 1 1961">Jaguar E-Type Series 1 1961</option>
-<option value="Rolls-Royce Silver Cloud III 1965">Rolls-Royce Silver Cloud III 1965</option></select></div>
-            <div><label class="field-label" for="booking-date">Дата оренди *</label><input class="field" id="booking-date" name="date" type="date" data-date-input required aria-describedby="booking-date-error" aria-invalid="false"><p id="booking-date-error" class="field-feedback" aria-live="polite"></p></div>
-            <div><label class="field-label" for="booking-duration">Тривалість, годин *</label><input class="field" id="booking-duration" name="duration" type="number" min="2" max="24" step="1" value="3" required aria-describedby="booking-duration-error" aria-invalid="false"><p id="booking-duration-error" class="field-feedback" aria-live="polite"></p></div>
-          </div>
-          <div><label class="field-label" for="booking-comment">Локація, формат події та побажання *</label><textarea class="field" id="booking-comment" name="comment" rows="3" minlength="10" maxlength="1500" placeholder="Весільна фотосесія, подача у центр Львова, потрібен водій…" aria-describedby="booking-comment-error" aria-invalid="false" required></textarea><p id="booking-comment-error" class="field-feedback" aria-live="polite"></p></div>
-          <div><label for="booking-consent" class="flex items-start gap-3 text-sm text-brand-muted leading-relaxed"><input id="booking-consent" class="mt-1 w-5 h-5 accent-brand-emerald shrink-0" type="checkbox" name="consent" aria-describedby="booking-consent-error" aria-invalid="false" required><span>Погоджуюся на використання моїх контактів для відповіді на цей запит. *</span></label><a href="#privacy" class="inline-block mt-2 text-sm text-brand-muted underline">Про обробку даних</a><p id="booking-consent-error" class="field-feedback" aria-live="polite"></p></div>
-          <button type="submit" class="btn-primary w-full">Сформувати заявку <span aria-hidden="true">↗</span></button>
-          <p id="booking-status" role="status" aria-live="polite" class="text-sm text-brand-muted"></p>
-          <section id="booking-preview" hidden aria-labelledby="booking-preview-heading" class="border-t border-brand-border pt-5">
-            <h3 id="booking-preview-heading" class="font-serif text-xl mb-4">Перевірте вашу заявку</h3><p id="booking-summary" class="text-sm text-brand-muted mb-5"></p>
-            <div class="flex flex-wrap gap-3"><a id="booking-email-link" class="btn-primary" href="mailto:info@retroauto.lviv.ua">Відкрити лист</a><button id="booking-copy" class="btn-secondary" type="button">Скопіювати текст</button></div>
-          </section>
-          <noscript><p class="text-brand-muted">Для формування заявки увімкніть JavaScript або <a href="mailto:info@retroauto.lviv.ua" class="underline">напишіть нам напряму</a>.</p></noscript>
-        </form>
+    <!-- 5. P2P-сценарій: запит → узгодження з власником → передача автомобіля. -->
+    <section id="how-it-works" class="py-16 sm:py-24" aria-labelledby="steps-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="eyebrow">Від мрії до першого повороту ключа</p>
+        <h2 id="steps-heading" class="font-serif text-3xl sm:text-4xl mb-10">Як це працює</h2>
+        <ol class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <li class="border-t border-brand-border pt-6"><span class="text-brand-emerald-light font-serif text-3xl">01</span><h3 class="font-serif text-2xl mt-4 mb-3">Оберіть авто та дату</h3><p class="text-brand-muted leading-relaxed">Перегляньте каталог, розрахуйте орієнтовну вартість і залиште побажання до поїздки.</p></li>
+          <li class="border-t border-brand-border pt-6"><span class="text-brand-emerald-light font-serif text-3xl">02</span><h3 class="font-serif text-2xl mt-4 mb-3">Узгодьте деталі</h3><p class="text-brand-muted leading-relaxed">Власник підтвердить доступність, маршрут, страхування, заставу та фінальний кошторис.</p></li>
+          <li class="border-t border-brand-border pt-6"><span class="text-brand-emerald-light font-serif text-3xl">03</span><h3 class="font-serif text-2xl mt-4 mb-3">Збережіть цей момент</h3><p class="text-brand-muted leading-relaxed">Огляньте авто під час передачі, оформіть домовленості та вирушайте назустріч своїй історії.</p></li>
+        </ol>
       </div>
     </section>
+    </div>
 
+    <div data-view="contacts" data-title="Контакти та бронювання">
     <section id="contacts" class="py-16 sm:py-24 bg-brand-secondary border-y border-brand-border" aria-labelledby="contacts-heading">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p class="eyebrow">Контакти / Шоурум</p><h2 id="contacts-heading" class="font-serif text-3xl sm:text-4xl mb-5">Побачимося у Львові</h2>
@@ -398,13 +371,46 @@
       </div>
     </section>
 
+    <!-- ЛР 9. Доступна адаптивна форма з клієнтською перевіркою та демонстрацією успіху. -->
+    <section id="booking" class="py-16 sm:py-24" aria-labelledby="booking-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-start">
+        <article><p class="eyebrow">Кожна історія починається з ідеї</p><h2 id="booking-heading" class="font-serif text-3xl sm:text-5xl mb-6">Підберемо авто під вашу подію</h2><p class="text-brand-muted leading-relaxed">Розкажіть про дату, локацію й настрій. Допоможемо обрати автомобіль та узгодити умови з його власником.</p><p class="text-sm text-brand-muted mt-6">Форма підготує лист на <a href="mailto:info@retroauto.lviv.ua" class="underline">info@retroauto.lviv.ua</a>. Його потрібно надіслати у власній поштовій програмі. Формування заявки ще не резервує автомобіль.</p></article>
+        <form id="booking-form" novalidate class="p-5 sm:p-8 rounded-2xl bg-brand-card border border-brand-border space-y-5">
+          <p class="text-sm text-brand-muted">Поля зі * обов’язкові. Дані перевіряються у браузері; лист ви надсилаєте самостійно.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div><label class="field-label" for="client-name">Ваше ім’я *</label><input class="field" id="client-name" name="name" type="text" autocomplete="name" minlength="2" maxlength="100" aria-describedby="client-name-error" aria-invalid="false" required><p id="client-name-error" class="field-feedback" aria-live="polite"></p></div>
+            <div><label class="field-label" for="client-email">Електронна пошта *</label><input class="field" id="client-email" name="email" type="email" autocomplete="email" maxlength="150" aria-describedby="client-email-error" aria-invalid="false" required><p id="client-email-error" class="field-feedback" aria-live="polite"></p></div>
+            <div><label class="field-label" for="client-phone">Телефон *</label><input class="field" id="client-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="32" placeholder="+380501234567" aria-describedby="client-phone-hint client-phone-error" aria-invalid="false" required><p id="client-phone-hint" class="text-xs text-brand-muted mt-2">+380 і 9 цифр без пробілів та дужок.</p><p id="client-phone-error" class="field-feedback" aria-live="polite"></p></div>
+            <div><label class="field-label" for="car-select">Автомобіль</label><select class="field" id="car-select" name="car"><option value="">Потрібна допомога з підбором</option><option value="Ford Mustang 1967">Ford Mustang 1967</option>
+<option value="Dodge Charger 1969">Dodge Charger 1969</option>
+<option value="Volkswagen Beetle 1972">Volkswagen Beetle 1972</option>
+<option value="Mercedes-Benz 300 SL Gullwing 1954">Mercedes-Benz 300 SL Gullwing 1954</option>
+<option value="Jaguar E-Type Series 1 1961">Jaguar E-Type Series 1 1961</option>
+<option value="Rolls-Royce Silver Cloud III 1965">Rolls-Royce Silver Cloud III 1965</option></select></div>
+            <div><label class="field-label" for="booking-date">Дата оренди *</label><input class="field" id="booking-date" name="date" type="date" data-date-input required aria-describedby="booking-date-error" aria-invalid="false"><p id="booking-date-error" class="field-feedback" aria-live="polite"></p></div>
+            <div><label class="field-label" for="booking-duration">Тривалість, годин *</label><input class="field" id="booking-duration" name="duration" type="number" min="2" max="24" step="1" value="3" required aria-describedby="booking-duration-error" aria-invalid="false"><p id="booking-duration-error" class="field-feedback" aria-live="polite"></p></div>
+          </div>
+          <div><label class="field-label" for="booking-comment">Локація, формат події та побажання *</label><textarea class="field" id="booking-comment" name="comment" rows="3" minlength="10" maxlength="1500" placeholder="Весільна фотосесія, подача у центр Львова, потрібен водій…" aria-describedby="booking-comment-error" aria-invalid="false" required></textarea><p id="booking-comment-error" class="field-feedback" aria-live="polite"></p></div>
+          <div><label for="booking-consent" class="flex items-start gap-3 text-sm text-brand-muted leading-relaxed"><input id="booking-consent" class="mt-1 w-5 h-5 accent-brand-emerald shrink-0" type="checkbox" name="consent" aria-describedby="booking-consent-error" aria-invalid="false" required><span>Погоджуюся на використання моїх контактів для відповіді на цей запит. *</span></label><a href="#privacy" class="inline-block mt-2 text-sm text-brand-muted underline">Про обробку даних</a><p id="booking-consent-error" class="field-feedback" aria-live="polite"></p></div>
+          <button type="submit" class="btn-primary w-full">Сформувати заявку <span aria-hidden="true">↗</span></button>
+          <p id="booking-status" role="status" aria-live="polite" class="text-sm text-brand-muted"></p>
+          <section id="booking-preview" hidden aria-labelledby="booking-preview-heading" class="border-t border-brand-border pt-5">
+            <h3 id="booking-preview-heading" class="font-serif text-xl mb-4">Перевірте вашу заявку</h3><p id="booking-summary" class="text-sm text-brand-muted mb-5"></p>
+            <div class="flex flex-wrap gap-3"><a id="booking-email-link" class="btn-primary" href="mailto:info@retroauto.lviv.ua">Відкрити лист</a><button id="booking-copy" class="btn-secondary" type="button">Скопіювати текст</button></div>
+          </section>
+          <noscript><p class="text-brand-muted">Для формування заявки увімкніть JavaScript або <a href="mailto:info@retroauto.lviv.ua" class="underline">напишіть нам напряму</a>.</p></noscript>
+        </form>
+      </div>
+    </section>
+
     <section id="rental-terms" class="py-12" aria-labelledby="terms-heading"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><h2 id="terms-heading" class="font-serif text-2xl mb-5">Перед поїздкою</h2><div class="grid md:grid-cols-2 gap-5"><details class="p-5 border border-brand-border rounded-xl"><summary class="cursor-pointer font-semibold">Правила оренди</summary><p class="text-sm text-brand-muted mt-4 leading-relaxed">Доступність автомобіля та остаточну ціну підтверджує власник. До оплати погодьте тривалість, маршрут, ліміт пробігу, страхове покриття, заставу й умови скасування. Для самостійного керування потрібне посвідчення відповідної категорії; вимоги до віку й стажу залежать від автомобіля. Під час передачі зафіксуйте стан авто разом із власником.</p></details><details id="privacy" class="p-5 border border-brand-border rounded-xl"><summary class="cursor-pointer font-semibold">Як використовуються дані заявки</summary><p class="text-sm text-brand-muted mt-4 leading-relaxed">Ця сторінка формує текст листа у вашому браузері й не зберігає заявку на сервері. Ви самі надсилаєте її через поштову програму. Контакти з листа потрібні для відповіді щодо оренди. Не додавайте платіжні дані чи копії документів. YouTube та Google Maps можуть отримувати технічні дані під час завантаження вбудованого вмісту.</p></details></div></div></section>
+    </div>
   </main>
 
   <!-- 7. Підвал: контакти, внутрішні правила та зовнішні посилання з noopener. -->
   <footer class="bg-brand-secondary border-t border-brand-border py-10"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-8 justify-between">
     <div><a href="#hero" class="inline-flex items-center gap-3 font-serif text-xl"><img src="assets/images/Logo-white.svg" alt="" width="64" height="32" class="w-16 h-8 object-contain">Retro Auto</a><p class="mt-4 text-sm text-brand-muted">Класика від власників. Історії для вас.</p><p class="text-xs text-brand-muted mt-4">© 2026 Retro Auto. Усі права захищено.</p></div>
-    <nav aria-label="Додаткові посилання" class="flex flex-col gap-3 text-sm text-brand-muted"><a href="#fleet">Автопарк</a><a href="#gallery">Фотогалерея</a><a href="#rental-terms">Правила оренди</a><a href="#privacy">Обробка даних</a><a href="mailto:info@retroauto.lviv.ua">info@retroauto.lviv.ua</a></nav>
+    <nav aria-label="Додаткові посилання" class="flex flex-col gap-3 text-sm text-brand-muted"><a href="#fleet">Автопарк</a><a href="#gallery">Фотогалерея</a><a href="#about">Про сервіс</a><a href="#rental-terms">Правила оренди</a><a href="#privacy">Обробка даних</a><a href="mailto:info@retroauto.lviv.ua">info@retroauto.lviv.ua</a></nav>
     <nav aria-label="Соціальні мережі" class="flex gap-3 items-start"><a class="btn-secondary" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Відкрити Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a><a class="btn-secondary" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Відкрити Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a><a class="btn-secondary" href="https://t.me/" target="_blank" rel="noopener noreferrer" aria-label="Відкрити Telegram"><i class="fa-brands fa-telegram" aria-hidden="true"></i></a></nav>
   </div></footer>
 
