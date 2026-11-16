@@ -1,7 +1,7 @@
 # Retro Auto
 
 Україномовний адаптивний лендинг P2P-оренди класичних автомобілів у Львові.
-HTML5, Tailwind Play CDN, окремий `styles.css`, Vanilla JavaScript.
+HTML5, Tailwind CSS 3 (локальна збірка), окремий `styles.css`, Vanilla JavaScript.
 
 ## Лабораторна 9
 
@@ -47,7 +47,14 @@ https://rostyslavmovchan.github.io/site_retro_auto/ та
 https://retro-auto-movchan.netlify.app/ . Нова форма перевірена локально;
 наявність її на цих адресах потрібно підтвердити після публікації.
 
-Для Vercel імпортуйте цей репозиторій, оберіть Other, кореневу папку `./`,
-без команди збірки. Після Deploy перевірте форму на виданому домені.
-Наступний push у підключену production-гілку має створити новий deployment.
-Не вказуйте вигадану Vercel-адресу у звіті до фактичного розгортання.
+## Лабораторна 12
+
+Команди npm ci, npm test і npm run build перевіряють проєкт і збирають сайт у dist/.
+Перед push додайте в GitHub → Settings → Secrets and variables → Actions секрети
+VERCEL_TOKEN, VERCEL_ORG_ID та VERCEL_PROJECT_ID для наявного проєкту Vercel.
+Ідентифікатори доступні в налаштуваннях Vercel або в .vercel/project.json після vercel link.
+Розгортання гілки master виконує GitHub Actions після тестів. У vercel.json вимкнено
+паралельний автодеплой з Git. Результат перевіряйте у вкладці Actions.
+
+Іконки Font Awesome Free 6.5.1 (CC BY 4.0). Ліцензії шрифтів є в assets/fonts.
+Swiper і Fancybox мають ті самі версії, що й до оптимізації.

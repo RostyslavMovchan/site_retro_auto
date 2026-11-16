@@ -7,36 +7,13 @@
   <meta name="description" content="Retro Auto — P2P-оренда класичних автомобілів у Львові. Оберіть ретро-авто для весілля, фотосесії, кінозйомки або вікенд-поїздки.">
   <title>Retro Auto — оренда ретро-авто у Львові</title>
   <link rel="icon" href="assets/images/Logo.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/images/hero-video-poster.jpg" as="image" fetchpriority="high">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <!-- Tailwind Play CDN: потрібні класи генеруються в браузері без кроку збірки. -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: {
-        colors: {
-          'brand-dark': '#0D0E10', 'brand-secondary': '#121417',
-          'brand-card': '#1A1D24', 'brand-border': 'rgba(229,231,235,0.14)',
-          'brand-emerald': '#10B981', 'brand-emerald-dark': '#059669',
-          'brand-emerald-light': '#34D399', 'brand-text': '#F3F4F6', 'brand-muted': '#B0B7C3'
-        },
-        fontFamily: { serif: ['"Playfair Display"', 'Georgia', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
-        boxShadow: { 'emerald-glow': '0 0 24px rgba(16,185,129,0.2)' }
-      } }
-    };
-  </script>
-  <!-- Власні стилі бренду, календаря та вбудованих блоків. -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preload" href="assets/images/hero-video-poster.webp" as="image" fetchpriority="high">
+  <link rel="canonical" href="https://siteretroauto.vercel.app/">
+  <link rel="stylesheet" href="assets/css/site.min.css">
   <script src="assets/js/validation.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" defer></script>
   <script src="assets/js/gallery.js" defer></script>
   <script src="assets/js/widget.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
 </head>
 <body class="font-sans antialiased min-h-screen">
   <a href="#main-content" class="skip-link">Перейти до основного вмісту</a>
@@ -46,8 +23,8 @@
       <div class="flex items-center justify-between h-20">
         
         <!-- Логотип компанії -->
-        <a href="#hero" class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald rounded-lg p-1" aria-label="Ретро Авто — Повернутися на головну">
-          <img src="assets/images/Logo-white.svg" alt="Логотип Ретро Авто" class="h-10 w-auto group-hover:scale-105 transition-transform duration-300">
+        <a href="#hero" class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald rounded-lg p-1" aria-label="Retro Auto — повернутися на головну">
+          <img src="assets/images/Logo-white.svg" width="624" height="241" alt="Логотип Ретро Авто" class="h-10 w-auto group-hover:scale-105 transition-transform duration-300">
           <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-brand-text group-hover:text-brand-emerald transition-colors duration-200">
             Retro <span class="text-brand-emerald">Auto</span>
           </span>
@@ -100,16 +77,15 @@
     <!-- 2. Єдиний H1 та головні CTA. Локальний відеофон без звуку плавно відтворюється по колу. -->
     <section id="hero" class="relative overflow-hidden border-b border-brand-border" aria-labelledby="hero-heading">
       <!-- Заставка — перший кадр цього ж відео: однакове кадрування забезпечує непомітний початок відтворення. -->
-      <video id="hero-background-video" class="hero-background-video" autoplay muted loop playsinline preload="auto" poster="assets/images/hero-video-poster.jpg" aria-hidden="true">
-        <source src="assets/video/video_content.mp4" type="video/mp4">
-      </video>
+      <video id="hero-background-video" class="hero-background-video" muted loop playsinline preload="none"
+             poster="assets/images/hero-video-poster.webp" data-src="assets/video/hero-optimized.mp4" aria-hidden="true"></video>
       <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/75 to-brand-dark/60" aria-hidden="true"></div>
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center flex flex-col items-center">
         <!-- Верхня панель інтерактивних віджетів (Календар, Бронювання, Калькулятор) -->
         <div class="w-full max-w-2xl mb-8 grid grid-cols-3 gap-2 sm:gap-4 bg-brand-card/80 backdrop-blur-md p-2 sm:p-3 rounded-2xl border border-brand-border shadow-xl">
           <!-- Кнопка 1: Календар подій / вільних дат -->
-          <button type="button" id="hero-widget-calendar" class="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 px-2 rounded-xl bg-brand-secondary/60 hover:bg-brand-emerald/10 hover:border-brand-emerald border border-transparent text-brand-text transition-all duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald" aria-label="Відкрити календар вільних дат">
-            <img src="assets/icons/calendar.svg" alt="" class="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform" aria-hidden="true">
+          <button type="button" id="hero-widget-calendar" class="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 px-2 rounded-xl bg-brand-secondary/60 hover:bg-brand-emerald/10 hover:border-brand-emerald border border-transparent text-brand-text transition-all duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald" aria-label="Дати: календар вільних дат">
+            <img src="assets/icons/calendar.webp" width="96" height="96" alt="" class="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform" aria-hidden="true">
             <span class="block text-left">
               <span class="block text-[11px] sm:text-xs text-brand-muted uppercase tracking-wider font-semibold">Дати</span>
               <span class="block text-xs sm:text-sm font-medium text-brand-text group-hover:text-brand-emerald">Календар</span>
@@ -117,8 +93,8 @@
           </button>
 
           <!-- Кнопка 2: Швидке бронювання -->
-          <a href="#booking" id="hero-widget-booking" class="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 px-2 rounded-xl bg-brand-secondary/60 hover:bg-brand-emerald/10 hover:border-brand-emerald border border-transparent text-brand-text transition-all duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald" aria-label="Перейти до форми бронювання">
-            <img src="assets/icons/insurance.svg" alt="" class="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform" aria-hidden="true">
+          <a href="#booking" id="hero-widget-booking" class="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 px-2 rounded-xl bg-brand-secondary/60 hover:bg-brand-emerald/10 hover:border-brand-emerald border border-transparent text-brand-text transition-all duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald" aria-label="Оренда: бронювання автомобіля">
+            <img src="assets/icons/insurance.webp" width="96" height="96" alt="" class="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform" aria-hidden="true">
             <div class="text-left">
               <span class="block text-[11px] sm:text-xs text-brand-muted uppercase tracking-wider font-semibold">Оренда</span>
               <span class="block text-xs sm:text-sm font-medium text-brand-text group-hover:text-brand-emerald">Бронювання</span>
@@ -126,8 +102,8 @@
           </a>
 
           <!-- Кнопка 3: Калькулятор вартості -->
-          <button type="button" id="hero-widget-calculator" class="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 px-2 rounded-xl bg-brand-secondary/60 hover:bg-brand-emerald/10 hover:border-brand-emerald border border-transparent text-brand-text transition-all duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald" aria-label="Відкрити калькулятор вартості оренди">
-            <img src="assets/icons/calculator.svg" alt="" class="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform" aria-hidden="true">
+          <button type="button" id="hero-widget-calculator" class="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2.5 py-2.5 px-2 rounded-xl bg-brand-secondary/60 hover:bg-brand-emerald/10 hover:border-brand-emerald border border-transparent text-brand-text transition-all duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald" aria-label="Тариф: калькулятор вартості оренди">
+            <img src="assets/icons/calculator.webp" width="96" height="89" alt="" class="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform" aria-hidden="true">
             <span class="block text-left">
               <span class="block text-[11px] sm:text-xs text-brand-muted uppercase tracking-wider font-semibold">Тариф</span>
               <span class="block text-xs sm:text-sm font-medium text-brand-text group-hover:text-brand-emerald">Калькулятор</span>
@@ -147,8 +123,8 @@
           <li>Прямий зв’язок із власником</li><li>Погодинна та добова оренда</li><li>Подача у Львові та області</li>
         </ul>
       </div>
-      <button type="button" id="hero-video-toggle" class="hero-video-toggle" aria-controls="hero-background-video" aria-label="Призупинити фонове відео">
-        <i class="fa-solid fa-pause" aria-hidden="true"></i><span>Пауза відео</span>
+      <button type="button" id="hero-video-toggle" class="hero-video-toggle" aria-controls="hero-background-video" aria-label="Відтворити відео">
+        <i class="fa-solid fa-play" aria-hidden="true"></i><span>Відтворити відео</span>
       </button>
     </section>
 
@@ -174,7 +150,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <article class="car-card group flex flex-col rounded-2xl border border-brand-border bg-brand-card overflow-hidden" aria-labelledby="car-1-title">
           <figure class="m-0">
-            <img src="assets/images/mustang-1967.jpg" alt="Ford Mustang 1967 — ілюстративне фото моделі" width="800" height="520" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
+            <img src="assets/images/mustang-1967.webp" srcset="assets/images/mustang-1967-480.webp 480w, assets/images/mustang-1967.webp 483w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="483" height="341" alt="Ford Mustang 1967 — ілюстративне фото моделі" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
             <figcaption class="px-5 pt-4 text-xs text-brand-muted">США · Американський характер</figcaption>
           </figure>
           <header class="car-heading px-5 pt-3"><h3 id="car-1-title" class="font-serif text-2xl text-brand-text">Ford Mustang 1967</h3></header>
@@ -182,12 +158,12 @@
           <footer class="mt-auto p-5 border-t border-brand-border">
             <p class="text-xl font-semibold text-brand-text">від 2 900 ₴ <span class="text-sm font-normal text-brand-muted">/ год</span></p>
             <p class="mt-1 text-sm text-brand-muted">від 18 500 ₴ / добу</p>
-            <a href="#booking" data-car="Ford Mustang 1967" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати Ford Mustang 1967">Обрати авто <span aria-hidden="true">↗</span></a>
+            <a href="#booking" data-car="Ford Mustang 1967" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати авто: Ford Mustang 1967">Обрати авто <span aria-hidden="true">↗</span></a>
           </footer>
         </article>
         <article class="car-card group flex flex-col rounded-2xl border border-brand-border bg-brand-card overflow-hidden" aria-labelledby="car-2-title">
           <figure class="m-0">
-            <img src="assets/images/charger-1969.jpg" alt="Dodge Charger 1969 — ілюстративне фото моделі" width="800" height="520" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
+            <img src="assets/images/charger-1969.webp" srcset="assets/images/charger-1969-480.webp 480w, assets/images/charger-1969-800.webp 800w, assets/images/charger-1969.webp 1440w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="1440" height="892" alt="Dodge Charger 1969 — ілюстративне фото моделі" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
             <figcaption class="px-5 pt-4 text-xs text-brand-muted">США · Кінематографічна легенда</figcaption>
           </figure>
           <header class="car-heading px-5 pt-3"><h3 id="car-2-title" class="font-serif text-2xl text-brand-text">Dodge Charger 1969</h3></header>
@@ -195,12 +171,12 @@
           <footer class="mt-auto p-5 border-t border-brand-border">
             <p class="text-xl font-semibold text-brand-text">від 3 200 ₴ <span class="text-sm font-normal text-brand-muted">/ год</span></p>
             <p class="mt-1 text-sm text-brand-muted">від 21 000 ₴ / добу</p>
-            <a href="#booking" data-car="Dodge Charger 1969" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати Dodge Charger 1969">Обрати авто <span aria-hidden="true">↗</span></a>
+            <a href="#booking" data-car="Dodge Charger 1969" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати авто: Dodge Charger 1969">Обрати авто <span aria-hidden="true">↗</span></a>
           </footer>
         </article>
         <article class="car-card group flex flex-col rounded-2xl border border-brand-border bg-brand-card overflow-hidden" aria-labelledby="car-3-title">
           <figure class="m-0">
-            <img src="assets/images/beetle-1972.jpg" alt="Volkswagen Beetle 1972 — ілюстративне фото моделі" width="800" height="520" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
+            <img src="assets/images/beetle-1972.webp" srcset="assets/images/beetle-1972-480.webp 480w, assets/images/beetle-1972-800.webp 800w, assets/images/beetle-1972.webp 960w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="960" height="720" alt="Volkswagen Beetle 1972 — ілюстративне фото моделі" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
             <figcaption class="px-5 pt-4 text-xs text-brand-muted">Німеччина · Маленька велика класика</figcaption>
           </figure>
           <header class="car-heading px-5 pt-3"><h3 id="car-3-title" class="font-serif text-2xl text-brand-text">Volkswagen Beetle 1972</h3></header>
@@ -208,12 +184,12 @@
           <footer class="mt-auto p-5 border-t border-brand-border">
             <p class="text-xl font-semibold text-brand-text">від 1 500 ₴ <span class="text-sm font-normal text-brand-muted">/ год</span></p>
             <p class="mt-1 text-sm text-brand-muted">від 9 500 ₴ / добу</p>
-            <a href="#booking" data-car="Volkswagen Beetle 1972" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати Volkswagen Beetle 1972">Обрати авто <span aria-hidden="true">↗</span></a>
+            <a href="#booking" data-car="Volkswagen Beetle 1972" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати авто: Volkswagen Beetle 1972">Обрати авто <span aria-hidden="true">↗</span></a>
           </footer>
         </article>
         <article class="car-card group flex flex-col rounded-2xl border border-brand-border bg-brand-card overflow-hidden" aria-labelledby="car-4-title">
           <figure class="m-0">
-            <img src="assets/images/mercedes-300sl-1954.jpg" alt="Mercedes-Benz 300 SL Gullwing 1954 — ілюстративне фото моделі" width="800" height="520" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
+            <img src="assets/images/mercedes-300sl-1954.webp" srcset="assets/images/mercedes-300sl-1954-480.webp 480w, assets/images/mercedes-300sl-1954-800.webp 800w, assets/images/mercedes-300sl-1954.webp 960w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="960" height="640" alt="Mercedes-Benz 300 SL Gullwing 1954 — ілюстративне фото моделі" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
             <figcaption class="px-5 pt-4 text-xs text-brand-muted">Німеччина · Класика з крилатими дверима</figcaption>
           </figure>
           <header class="car-heading px-5 pt-3"><h3 id="car-4-title" class="font-serif text-2xl text-brand-text">Mercedes-Benz 300 SL Gullwing 1954</h3></header>
@@ -221,12 +197,12 @@
           <footer class="mt-auto p-5 border-t border-brand-border">
             <p class="text-xl font-semibold text-brand-text">від 3 800 ₴ <span class="text-sm font-normal text-brand-muted">/ год</span></p>
             <p class="mt-1 text-sm text-brand-muted">від 24 500 ₴ / добу</p>
-            <a href="#booking" data-car="Mercedes-Benz 300 SL Gullwing 1954" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати Mercedes-Benz 300 SL Gullwing 1954">Обрати авто <span aria-hidden="true">↗</span></a>
+            <a href="#booking" data-car="Mercedes-Benz 300 SL Gullwing 1954" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати авто: Mercedes-Benz 300 SL Gullwing 1954">Обрати авто <span aria-hidden="true">↗</span></a>
           </footer>
         </article>
         <article class="car-card group flex flex-col rounded-2xl border border-brand-border bg-brand-card overflow-hidden" aria-labelledby="car-5-title">
           <figure class="m-0">
-            <img src="assets/images/jaguar-etype-1961.jpg" alt="Jaguar E-Type Series 1 1961 — ілюстративне фото моделі" width="800" height="520" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
+            <img src="assets/images/jaguar-etype-1961.webp" srcset="assets/images/jaguar-etype-1961-480.webp 480w, assets/images/jaguar-etype-1961-800.webp 800w, assets/images/jaguar-etype-1961.webp 960w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="960" height="708" alt="Jaguar E-Type Series 1 1961 — ілюстративне фото моделі" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
             <figcaption class="px-5 pt-4 text-xs text-brand-muted">Велика Британія · Британська елегантність</figcaption>
           </figure>
           <header class="car-heading px-5 pt-3"><h3 id="car-5-title" class="font-serif text-2xl text-brand-text">Jaguar E-Type Series 1 1961</h3></header>
@@ -234,12 +210,12 @@
           <footer class="mt-auto p-5 border-t border-brand-border">
             <p class="text-xl font-semibold text-brand-text">від 3 400 ₴ <span class="text-sm font-normal text-brand-muted">/ год</span></p>
             <p class="mt-1 text-sm text-brand-muted">від 22 000 ₴ / добу</p>
-            <a href="#booking" data-car="Jaguar E-Type Series 1 1961" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати Jaguar E-Type Series 1 1961">Обрати авто <span aria-hidden="true">↗</span></a>
+            <a href="#booking" data-car="Jaguar E-Type Series 1 1961" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати авто: Jaguar E-Type Series 1 1961">Обрати авто <span aria-hidden="true">↗</span></a>
           </footer>
         </article>
         <article class="car-card group flex flex-col rounded-2xl border border-brand-border bg-brand-card overflow-hidden" aria-labelledby="car-6-title">
           <figure class="m-0">
-            <img src="assets/images/rolls-royce-1965.jpg" alt="Rolls-Royce Silver Cloud III 1965 — ілюстративне фото моделі" width="800" height="520" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
+            <img src="assets/images/rolls-royce-1965.webp" srcset="assets/images/rolls-royce-1965-480.webp 480w, assets/images/rolls-royce-1965-800.webp 800w, assets/images/rolls-royce-1965.webp 1440w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="1440" height="900" alt="Rolls-Royce Silver Cloud III 1965 — ілюстративне фото моделі" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105">
             <figcaption class="px-5 pt-4 text-xs text-brand-muted">Велика Британія · Стримана розкіш</figcaption>
           </figure>
           <header class="car-heading px-5 pt-3"><h3 id="car-6-title" class="font-serif text-2xl text-brand-text">Rolls-Royce Silver Cloud III 1965</h3></header>
@@ -247,7 +223,7 @@
           <footer class="mt-auto p-5 border-t border-brand-border">
             <p class="text-xl font-semibold text-brand-text">від 4 500 ₴ <span class="text-sm font-normal text-brand-muted">/ год</span></p>
             <p class="mt-1 text-sm text-brand-muted">від 29 500 ₴ / добу</p>
-            <a href="#booking" data-car="Rolls-Royce Silver Cloud III 1965" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати Rolls-Royce Silver Cloud III 1965">Обрати авто <span aria-hidden="true">↗</span></a>
+            <a href="#booking" data-car="Rolls-Royce Silver Cloud III 1965" class="car-select-btn btn-primary mt-5 w-full" aria-label="Обрати авто: Rolls-Royce Silver Cloud III 1965">Обрати авто <span aria-hidden="true">↗</span></a>
           </footer>
         </article>
         </div>
@@ -269,38 +245,38 @@
         <div class="swiper gallery-frame">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <a class="gallery-photo" href="assets/images/mustang-1967.jpg" data-fancybox="retro-fleet" data-caption="Ford Mustang 1967">
-                <img src="assets/images/mustang-1967.jpg" alt="" loading="lazy" decoding="async">
+              <a class="gallery-photo" href="assets/images/mustang-1967.webp" data-fancybox="retro-fleet" data-caption="Ford Mustang 1967">
+                <img src="assets/images/mustang-1967.webp" srcset="assets/images/mustang-1967-480.webp 480w, assets/images/mustang-1967.webp 483w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="483" height="341" alt="" loading="lazy" decoding="async">
                 <span>Ford Mustang 1967</span>
               </a>
             </div>
             <div class="swiper-slide">
-              <a class="gallery-photo" href="assets/images/charger-1969.jpg" data-fancybox="retro-fleet" data-caption="Dodge Charger 1969">
-                <img src="assets/images/charger-1969.jpg" alt="" loading="lazy" decoding="async">
+              <a class="gallery-photo" href="assets/images/charger-1969.webp" data-fancybox="retro-fleet" data-caption="Dodge Charger 1969">
+                <img src="assets/images/charger-1969.webp" srcset="assets/images/charger-1969-480.webp 480w, assets/images/charger-1969-800.webp 800w, assets/images/charger-1969.webp 1440w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="1440" height="892" alt="" loading="lazy" decoding="async">
                 <span>Dodge Charger 1969</span>
               </a>
             </div>
             <div class="swiper-slide">
-              <a class="gallery-photo" href="assets/images/beetle-1972.jpg" data-fancybox="retro-fleet" data-caption="Volkswagen Beetle 1972">
-                <img src="assets/images/beetle-1972.jpg" alt="" loading="lazy" decoding="async">
+              <a class="gallery-photo" href="assets/images/beetle-1972.webp" data-fancybox="retro-fleet" data-caption="Volkswagen Beetle 1972">
+                <img src="assets/images/beetle-1972.webp" srcset="assets/images/beetle-1972-480.webp 480w, assets/images/beetle-1972-800.webp 800w, assets/images/beetle-1972.webp 960w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="960" height="720" alt="" loading="lazy" decoding="async">
                 <span>Volkswagen Beetle 1972</span>
               </a>
             </div>
             <div class="swiper-slide">
-              <a class="gallery-photo" href="assets/images/mercedes-300sl-1954.jpg" data-fancybox="retro-fleet" data-caption="Mercedes-Benz 300 SL 1954">
-                <img src="assets/images/mercedes-300sl-1954.jpg" alt="" loading="lazy" decoding="async">
+              <a class="gallery-photo" href="assets/images/mercedes-300sl-1954.webp" data-fancybox="retro-fleet" data-caption="Mercedes-Benz 300 SL 1954">
+                <img src="assets/images/mercedes-300sl-1954.webp" srcset="assets/images/mercedes-300sl-1954-480.webp 480w, assets/images/mercedes-300sl-1954-800.webp 800w, assets/images/mercedes-300sl-1954.webp 960w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="960" height="640" alt="" loading="lazy" decoding="async">
                 <span>Mercedes-Benz 300 SL 1954</span>
               </a>
             </div>
             <div class="swiper-slide">
-              <a class="gallery-photo" href="assets/images/jaguar-etype-1961.jpg" data-fancybox="retro-fleet" data-caption="Jaguar E-Type 1961">
-                <img src="assets/images/jaguar-etype-1961.jpg" alt="" loading="lazy" decoding="async">
+              <a class="gallery-photo" href="assets/images/jaguar-etype-1961.webp" data-fancybox="retro-fleet" data-caption="Jaguar E-Type 1961">
+                <img src="assets/images/jaguar-etype-1961.webp" srcset="assets/images/jaguar-etype-1961-480.webp 480w, assets/images/jaguar-etype-1961-800.webp 800w, assets/images/jaguar-etype-1961.webp 960w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="960" height="708" alt="" loading="lazy" decoding="async">
                 <span>Jaguar E-Type 1961</span>
               </a>
             </div>
             <div class="swiper-slide">
-              <a class="gallery-photo" href="assets/images/rolls-royce-1965.jpg" data-fancybox="retro-fleet" data-caption="Rolls-Royce Silver Cloud 1965">
-                <img src="assets/images/rolls-royce-1965.jpg" alt="" loading="lazy" decoding="async">
+              <a class="gallery-photo" href="assets/images/rolls-royce-1965.webp" data-fancybox="retro-fleet" data-caption="Rolls-Royce Silver Cloud 1965">
+                <img src="assets/images/rolls-royce-1965.webp" srcset="assets/images/rolls-royce-1965-480.webp 480w, assets/images/rolls-royce-1965-800.webp 800w, assets/images/rolls-royce-1965.webp 1440w" sizes="(min-width: 1280px) 390px, (min-width: 1024px) 31vw, (min-width: 640px) 47vw, 94vw" width="1440" height="900" alt="" loading="lazy" decoding="async">
                 <span>Rolls-Royce Silver Cloud 1965</span>
               </a>
             </div>
@@ -345,7 +321,7 @@
     <section id="about" class="py-14 sm:py-16 bg-brand-secondary border-y border-brand-border" aria-labelledby="media-heading">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center">
         <article><p class="eyebrow">Про наш автопарк</p><h2 id="media-heading" class="font-serif text-3xl sm:text-4xl mb-6">Класика, яку треба відчути</h2><p class="text-brand-muted leading-relaxed">Звук двигуна, хромовані деталі й особливий ритм дороги. Подивіться історію Shelby GT350 1967 року, щоб відчути настрій майбутньої поїздки.</p><p class="text-sm text-brand-muted mt-5">Відео: Petrolicious · «The Long Road Home: A Shelby GT350’s Revival».</p><a class="inline-block mt-5 text-brand-emerald-light underline underline-offset-4" href="https://www.youtube.com/watch?v=fJDrjdXmFeI" target="_blank" rel="noopener noreferrer">Переглянути на YouTube ↗</a></article>
-        <figure class="m-0 min-w-0"><div class="video-frame overflow-hidden rounded-2xl border border-brand-border bg-brand-card"><iframe src="https://www.youtube-nocookie.com/embed/fJDrjdXmFeI?rel=0" title="Відеоогляд автопарку Retro Auto" width="960" height="540" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div><figcaption class="text-xs text-brand-muted mt-3">Авторський відеоогляд класичного авто. Можливість перегляду залежить від доступності YouTube у вашому регіоні.</figcaption></figure>
+        <figure class="m-0 min-w-0"><div class="video-frame overflow-hidden rounded-2xl border border-brand-border bg-brand-card"><button class="media-facade" type="button" data-embed-src="https://www.youtube-nocookie.com/embed/fJDrjdXmFeI?rel=0" data-embed-title="Відеоогляд автопарку Retro Auto"><i class="fa-solid fa-play" aria-hidden="true"></i>Відтворити відеоогляд</button></div><figcaption class="text-xs text-brand-muted mt-3">Авторський відеоогляд класичного авто. <a href="https://www.youtube.com/watch?v=fJDrjdXmFeI" class="underline">Відкрити на YouTube</a>.</figcaption></figure>
       </div>
     </section>
 
@@ -396,7 +372,7 @@
                referrerpolicy обмежує передавання адреси сторінки доменом.
                Посилання під картою дозволяє відкрити маршрут окремо.
                ============================================================ -->
-          <figure class="m-0 flex flex-col min-w-0"><div class="map-frame rounded-2xl overflow-hidden border border-brand-border bg-brand-card"><iframe src="https://maps.google.com/maps?q=площа%20Ринок%2C%20Львів&amp;z=14&amp;output=embed" title="Центральний офіс Retro Auto" width="800" height="380" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><figcaption class="text-sm text-brand-muted mt-4 flex flex-wrap gap-4 justify-between"><span>Львів, площа Ринок — орієнтир для зустрічі</span><a href="https://www.google.com/maps/search/?api=1&amp;query=площа%20Ринок%20Львів" class="text-brand-emerald-light underline" target="_blank" rel="noopener noreferrer">Відкрити мапу ↗</a></figcaption></figure>
+          <figure class="m-0 flex flex-col min-w-0"><div class="map-frame rounded-2xl overflow-hidden border border-brand-border bg-brand-card"><button class="media-facade" type="button" data-embed-src="https://maps.google.com/maps?q=площа%20Ринок%2C%20Львів&amp;z=14&amp;output=embed" data-embed-title="Центральний офіс Retro Auto"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>Показати мапу</button></div><figcaption class="text-sm text-brand-muted mt-4 flex flex-wrap gap-4 justify-between"><span>Львів, площа Ринок — орієнтир для зустрічі</span><a href="https://www.google.com/maps/search/?api=1&amp;query=площа%20Ринок%20Львів" class="text-brand-emerald-light underline" target="_blank" rel="noopener noreferrer">Відкрити мапу ↗</a></figcaption></figure>
 
           <!-- ============================================================
                ЛР №7 · ДИНАМІЧНИЙ ВІДЖЕТ У СЕМАНТИЧНОМУ ASIDE
@@ -536,407 +512,6 @@
     <button type="button" class="btn-primary w-full mt-6">Закрити</button>
   </dialog>
 
-  <script>
 
-    document.addEventListener('DOMContentLoaded', () => {
-
-      // Відеофон: локальний ролик із плавним циклом, без звуку.
-      // Користувач може призупинити рух; reduced-motion враховується автоматично.
-      const heroVideo = document.getElementById('hero-background-video');
-      const heroVideoToggle = document.getElementById('hero-video-toggle');
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      function syncHeroVideoControl() {
-        const paused = heroVideo.paused;
-        heroVideoToggle.setAttribute('aria-label', paused ? 'Відтворити фонове відео' : 'Призупинити фонове відео');
-        heroVideoToggle.querySelector('span').textContent = paused ? 'Відтворити відео' : 'Пауза відео';
-        heroVideoToggle.querySelector('i').className = paused ? 'fa-solid fa-play' : 'fa-solid fa-pause';
-      }
-      async function playHeroVideo() {
-        try { await heroVideo.play(); } catch { syncHeroVideoControl(); }
-      }
-      heroVideo.addEventListener('play', syncHeroVideoControl);
-      heroVideo.addEventListener('pause', syncHeroVideoControl);
-      heroVideoToggle.addEventListener('click', () => {
-        if (heroVideo.paused) playHeroVideo();
-        else heroVideo.pause();
-      });
-      function applyMotionPreference() {
-        if (reducedMotion.matches) heroVideo.pause();
-        else playHeroVideo();
-        syncHeroVideoControl();
-      }
-      reducedMotion.addEventListener('change', applyMotionPreference);
-      applyMotionPreference();
-
-      
-      // 1. Mobile Menu Toggle
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const iconBars = document.getElementById('menu-icon-bars');
-      const iconClose = document.getElementById('menu-icon-close');
-      const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-
-      function toggleMobileMenu() {
-        const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-        mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-        mobileMenu.classList.toggle('hidden');
-        iconBars.classList.toggle('hidden');
-        iconClose.classList.toggle('hidden');
-      }
-
-      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          if (!mobileMenu.classList.contains('hidden')) {
-            toggleMobileMenu();
-          }
-        });
-      });
-
-      // 2. Dynamic ScrollSpy: Підсвічування активного пункту навігації
-      const sections = document.querySelectorAll('section[id], footer[id]');
-      const navLinks = document.querySelectorAll('nav a.nav-link');
-
-      function updateActiveNav() {
-        const scrollPosition = window.scrollY + 120;
-
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.offsetHeight;
-          const sectionId = section.getAttribute('id');
-
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-              link.classList.remove('active');
-              if (link.getAttribute('href') === `#${sectionId}`) {
-                link.classList.add('active');
-              }
-            });
-          }
-        });
-      }
-
-      window.addEventListener('scroll', updateActiveNav, { passive: true });
-      updateActiveNav();
-
-      // 3. Modals Management (Calendar & Calculator)
-      const calendarModal = document.getElementById('calendar-modal');
-      const calculatorModal = document.getElementById('calculator-modal');
-      const openCalendarBtn = document.getElementById('hero-widget-calendar');
-      const openCalcBtn = document.getElementById('hero-widget-calculator');
-      const heroCalcCta = document.getElementById('hero-calc-cta');
-      const closeButtons = document.querySelectorAll('.modal-close-btn');
-      let modalTrigger = null;
-
-      function openModal(modal) {
-        modalTrigger = document.activeElement;
-        if (modal === calendarModal) renderCalendar();
-        modal.classList.remove('hidden');
-        document.querySelector('main').inert = true;
-        document.getElementById('main-header').inert = true;
-        document.querySelector('body > footer').inert = true;
-        document.body.classList.add('overflow-hidden');
-        modal.querySelector('.modal-close-btn').focus();
-      }
-
-      function closeModal(modal) {
-        if (modal.classList.contains('hidden')) return;
-        modal.classList.add('hidden');
-        document.querySelector('main').inert = false;
-        document.getElementById('main-header').inert = false;
-        document.querySelector('body > footer').inert = false;
-        document.body.classList.remove('overflow-hidden');
-        if (modalTrigger) modalTrigger.focus({ preventScroll: true });
-      }
-
-      if (openCalendarBtn) openCalendarBtn.addEventListener('click', () => openModal(calendarModal));
-      if (openCalcBtn) openCalcBtn.addEventListener('click', () => openModal(calculatorModal));
-      if (heroCalcCta) heroCalcCta.addEventListener('click', () => openModal(calculatorModal));
-
-      closeButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          closeModal(calendarModal);
-          closeModal(calculatorModal);
-        });
-      });
-
-      [calendarModal, calculatorModal].forEach(modal => {
-        modal.addEventListener('click', (e) => {
-          if (e.target === modal) closeModal(modal);
-        });
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          closeModal(calendarModal);
-          closeModal(calculatorModal);
-        }
-        if (e.key === 'Tab') {
-          const modal = [calendarModal, calculatorModal].find(item => !item.classList.contains('hidden'));
-          if (!modal) return;
-          const controls = modal.querySelectorAll('button:not(:disabled), input:not(:disabled), select:not(:disabled), a[href]');
-          const first = controls[0];
-          const last = controls[controls.length - 1];
-          if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-          } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
-          }
-        }
-      });
-
-      // 4. Transfer a validated quote to the existing booking form.
-      calculatorModal.addEventListener('rental:quoted', ({ detail }) => {
-        const bookingSection = document.getElementById('booking');
-        const bookingCar = document.getElementById('car-select');
-        const bookingDuration = document.getElementById('booking-duration');
-        if (!bookingSection || !bookingCar || !bookingDuration) return;
-
-        bookingCar.value = detail.car;
-        bookingDuration.value = detail.hours;
-        bookingDuration.dispatchEvent(new Event('input', { bubbles: true }));
-        closeModal(calculatorModal);
-        bookingDuration.focus({ preventScroll: true });
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        bookingSection.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth' });
-        bookingSection.classList.add('form-highlight-pulse');
-        setTimeout(() => bookingSection.classList.remove('form-highlight-pulse'), 1500);
-      });
-
-      // 5. Calendar: local dates and demo availability (no server connected).
-      const calendarApplyBtn = document.getElementById('calendar-apply-btn');
-      const calendarDateInput = document.getElementById('calendar-date-input');
-      const bookingDate = document.getElementById('booking-date');
-      const calendarDays = document.getElementById('calendar-days');
-      const calendarStatus = document.getElementById('calendar-selection-status');
-      const demoAvailability = new Map();
-      const shortDate = new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'short' });
-      const weekday = new Intl.DateTimeFormat('uk-UA', { weekday: 'short' });
-      const fullDate = new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
-
-      function localDateValue(date) {
-        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-      }
-
-      function syncCalendarSelection(showError = false) {
-        const value = calendarDateInput.value;
-        const status = demoAvailability.get(value);
-        let error = '';
-        if (!value) error = 'Оберіть дату в календарі або введіть її вручну.';
-        else if (!calendarDateInput.validity.valid) error = 'Оберіть коректну дату, не раніше сьогодні.';
-        else if (status === 'busy') error = 'Ця дата зайнята. Оберіть інший день.';
-        else if (status === 'reserved') error = 'На цю дату діє тимчасова бронь. Оберіть інший день.';
-
-        calendarDays.querySelectorAll('.calendar-day').forEach(button => {
-          button.setAttribute('aria-pressed', String(button.dataset.date === value && !error));
-        });
-        const invalid = Boolean(error && (value || showError));
-        calendarDateInput.setAttribute('aria-invalid', String(invalid));
-        calendarStatus.classList.toggle('is-error', invalid);
-        calendarStatus.textContent = error || `Обрано: ${fullDate.format(new Date(`${value}T12:00:00`))} Дату буде перенесено до заявки.`;
-        return !error;
-      }
-
-      function renderCalendar() {
-        const today = new Date();
-        today.setHours(12, 0, 0, 0);
-        calendarDateInput.min = localDateValue(today);
-        demoAvailability.clear();
-        calendarDays.replaceChildren();
-        for (let offset = 1; offset <= 12; offset++) {
-          const date = new Date(today);
-          date.setDate(today.getDate() + offset);
-          const value = localDateValue(date);
-          // Sample statuses mirror the reference; replace with an availability API when connected.
-          const status = [3, 8].includes(offset) ? 'busy' : offset === 5 ? 'reserved' : 'available';
-          const label = status === 'busy' ? 'Зайнято' : status === 'reserved' ? 'Резерв' : 'Вільно';
-          const icon = status === 'busy' ? 'fa-lock' : status === 'reserved' ? 'fa-clock' : 'fa-circle-check';
-          demoAvailability.set(value, status);
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'calendar-day';
-          button.dataset.date = value;
-          button.dataset.status = status;
-          button.disabled = status !== 'available';
-          button.setAttribute('aria-label', `${fullDate.format(date)}, ${label}`);
-          button.setAttribute('aria-pressed', 'false');
-          button.innerHTML = `<span class="calendar-day-date">${shortDate.format(date)}</span><span>${weekday.format(date)}</span><span class="calendar-day-state"><i class="fa-solid ${icon}" aria-hidden="true"></i>${label}</span>`;
-          button.addEventListener('click', () => {
-            calendarDateInput.value = value;
-            syncCalendarSelection();
-          });
-          calendarDays.append(button);
-        }
-        syncCalendarSelection();
-      }
-
-      calendarDateInput.addEventListener('input', () => syncCalendarSelection());
-
-      if (calendarApplyBtn) {
-        calendarApplyBtn.addEventListener('click', () => {
-          if (!syncCalendarSelection(true)) {
-            calendarDateInput.focus();
-            return;
-          }
-          bookingDate.value = calendarDateInput.value;
-          closeModal(calendarModal);
-          const bookingSection = document.getElementById('booking');
-          bookingSection.scrollIntoView({ behavior: 'smooth' });
-          bookingDate.focus({ preventScroll: true });
-        });
-      }
-
-      // 6. Quick car selection from cards to booking form
-      const carButtons = document.querySelectorAll('.car-select-btn');
-      const carSelect = document.getElementById('car-select');
-
-      carButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const carName = btn.getAttribute('data-car');
-          if (carSelect && carName) {
-            for (let option of carSelect.options) {
-              if (option.value === carName || option.text.includes(carName)) {
-                carSelect.value = option.value;
-                break;
-              }
-            }
-          }
-        });
-      });
-
-
-      // Static hosting: prepare an email draft; never claim that a server received a booking.
-      const bookingForm = document.getElementById('booking-form');
-      const bookingPreview = document.getElementById('booking-preview');
-      const bookingEmailLink = document.getElementById('booking-email-link');
-      let bookingText = '';
-      bookingForm.addEventListener('booking:validated', (event) => {
-        const fields = event.detail;
-        bookingText = [
-          'Заявка Retro Auto',
-          `Авто: ${fields.get('car') || 'Потрібна допомога з підбором'}`,
-          `Дата: ${fields.get('date')}`,
-          `Тривалість: ${fields.get('duration')} год`,
-          `Ім’я: ${fields.get('name')}`,
-          `Email: ${fields.get('email')}`,
-          `Телефон: ${fields.get('phone')}`,
-          `Побажання: ${fields.get('comment') || 'Без додаткових побажань'}`
-        ].join('\n');
-        document.getElementById('booking-summary').textContent = bookingText;
-        bookingEmailLink.href = `mailto:info@retroauto.lviv.ua?subject=${encodeURIComponent('Підбір ретро-авто — Retro Auto')}&body=${encodeURIComponent(bookingText)}`;
-        bookingPreview.hidden = false;
-        document.getElementById('booking-status').textContent = 'Заявку сформовано. Перевірте її та натисніть «Відкрити лист». Надсилання відбувається у вашій поштовій програмі.';
-      });
-      document.getElementById('booking-copy').addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(bookingText);
-          document.getElementById('booking-status').textContent = 'Текст заявки скопійовано.';
-        } catch {
-          document.getElementById('booking-status').textContent = 'Автоматичне копіювання недоступне. Виділіть текст заявки та скопіюйте його вручну.';
-        }
-      });
-
-      /* ЛР №7: динамічний валютний віджет.
-         Єдине зовнішнє джерело — публічний HTTPS API НБУ; ключ доступу не потрібен.
-         Запитується курс на календарну дату в Europe/Kyiv, а не часовий пояс хостингу.
-         Відповідь перевіряється: потрібні USD, EUR, додатні rate та дата курсу.
-         Перерахунок: сума × курс вихідної валюти до UAH / курс цільової до UAH.
-         Жодних вигаданих запасних курсів: при помилці показуємо повідомлення та повтор.
-         Дані API додаються через textContent, не як довірений HTML.
-      */
-      const fxAmount = document.getElementById('fx-amount');
-      const fxFrom = document.getElementById('fx-from');
-      const fxTo = document.getElementById('fx-to');
-      const fxOutput = document.getElementById('fx-output');
-      const fxStatus = document.getElementById('fx-status');
-      const fxRefresh = document.getElementById('fx-refresh');
-      const numberFormat = new Intl.NumberFormat('uk-UA', { maximumFractionDigits: 2 });
-      let exchangeRates = null;
-      let fxLoading = false;
-
-      function convertCurrency() {
-        if (!exchangeRates) return;
-        const value = fxAmount.valueAsNumber;
-        if (!Number.isFinite(value) || value < 0 || !fxAmount.checkValidity()) {
-          fxOutput.textContent = 'Введіть коректну невід’ємну суму.';
-          return;
-        }
-        const converted = value * exchangeRates[fxFrom.value] / exchangeRates[fxTo.value];
-        fxOutput.textContent = `${numberFormat.format(value)} ${fxFrom.value} ≈ ${numberFormat.format(converted)} ${fxTo.value}`;
-      }
-
-      async function loadExchangeRates() {
-        if (fxLoading) return;
-        fxLoading = true;
-        fxRefresh.disabled = true;
-        document.getElementById('currency-widget').setAttribute('aria-busy', 'true');
-        fxStatus.textContent = 'Завантажуємо офіційні курси НБУ…';
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 10000);
-        try {
-          const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Kyiv', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
-          const datePart = (type) => parts.find(part => part.type === type).value;
-          const date = `${datePart('year')}${datePart('month')}${datePart('day')}`;
-          const response = await fetch(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=${date}&json`, { signal: controller.signal, credentials: 'omit' });
-          if (!response.ok) throw new Error('NBU HTTP error');
-          const data = await response.json();
-          if (!Array.isArray(data)) throw new Error('Invalid response');
-          const usd = data.find(item => item.cc === 'USD');
-          const eur = data.find(item => item.cc === 'EUR');
-          if (![usd, eur].every(item => item && Number.isFinite(item.rate) && item.rate > 0 && typeof item.exchangedate === 'string')) throw new Error('Missing rates');
-          exchangeRates = { UAH: 1, USD: usd.rate, EUR: eur.rate };
-          document.getElementById('fx-usd').textContent = `${numberFormat.format(usd.rate)} ₴`;
-          document.getElementById('fx-eur').textContent = `${numberFormat.format(eur.rate)} ₴`;
-          fxStatus.textContent = `Курс USD на ${usd.exchangedate}, EUR на ${eur.exchangedate}.`;
-          convertCurrency();
-        } catch {
-          fxStatus.textContent = exchangeRates
-            ? 'Не вдалося оновити курс. Залишено попередньо завантажені дані цієї сесії.'
-            : 'Курси тимчасово недоступні. Перевірте з’єднання та натисніть «Оновити». ';
-          if (!exchangeRates) fxOutput.textContent = 'Розрахунок з’явиться після завантаження курсів.';
-        } finally {
-          clearTimeout(timeout);
-          fxLoading = false;
-          fxRefresh.disabled = false;
-          document.getElementById('currency-widget').setAttribute('aria-busy', 'false');
-        }
-      }
-      fxAmount.addEventListener('input', convertCurrency);
-      fxFrom.addEventListener('change', convertCurrency);
-      fxTo.addEventListener('change', convertCurrency);
-      fxRefresh.addEventListener('click', loadExchangeRates);
-      // Завантажуємо зовнішні дані лише коли віджет наближається до області перегляду.
-      if ('IntersectionObserver' in window) {
-        const fxObserver = new IntersectionObserver((entries, observer) => {
-          if (entries.some(entry => entry.isIntersecting)) {
-            loadExchangeRates();
-            observer.disconnect();
-          }
-        }, { rootMargin: '250px' });
-        fxObserver.observe(document.getElementById('currency-widget'));
-      } else {
-        loadExchangeRates();
-      }
-      // Закриваємо мобільну навігацію при переході на десктоп або натисканні Escape.
-      window.matchMedia('(min-width: 1024px)').addEventListener('change', (event) => {
-        if (event.matches && mobileMenuBtn.getAttribute('aria-expanded') === 'true') toggleMobileMenu();
-      });
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
-          toggleMobileMenu();
-          mobileMenuBtn.focus();
-        }
-      });
-      document.querySelectorAll('[data-date-input]').forEach(input => {
-        input.min = localDateValue(new Date());
-      });
-      // Фон сторінки недоступний для взаємодії, доки відкрите модальне вікно.
-      // Підтримка inert у сучасних браузерах доповнює наявну пастку фокусу.
-    });
-
-  </script>
 </body>
 </html>

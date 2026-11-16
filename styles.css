@@ -455,3 +455,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
   height: 12px;
   background: var(--color-accent);
 }
+
+/* ЛР 12: кнопки завантаження зовнішніх віджетів. */
+.media-facade {
+  display: flex; width: 100%; height: 100%;
+  align-items: center; justify-content: center; gap: .75rem;
+  padding: 1rem; border: 0; color: var(--color-text);
+  background: radial-gradient(ellipse at center, #18302a, var(--color-surface) 75%);
+  font-weight: 600;
+}
+.media-facade:hover { color: #6ee7b7; }
+.media-facade:focus-visible { outline-offset: -5px; }
