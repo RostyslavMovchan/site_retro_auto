@@ -36,6 +36,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" defer></script>
   <script src="assets/js/gallery.js" defer></script>
+  <script src="assets/js/widget.js" defer></script>
 </head>
 <body class="font-sans antialiased min-h-screen">
   <a href="#main-content" class="skip-link">Перейти до основного вмісту</a>
@@ -485,20 +486,21 @@
       <div class="space-y-4">
         <div>
           <label for="calc-car" class="block text-xs font-semibold uppercase text-brand-muted mb-1.5">Автомобіль</label>
-          <select id="calc-car" class="w-full bg-brand-secondary border border-brand-border rounded-xl px-4 py-2.5 text-sm text-brand-text focus:outline-none focus:border-brand-emerald"><option value="2900">Ford Mustang 1967 (2 900 ₴/год)</option>
-<option value="3200">Dodge Charger 1969 (3 200 ₴/год)</option>
-<option value="1500">Volkswagen Beetle 1972 (1 500 ₴/год)</option>
-<option value="3800">Mercedes-Benz 300 SL Gullwing 1954 (3 800 ₴/год)</option>
-<option value="3400">Jaguar E-Type Series 1 1961 (3 400 ₴/год)</option>
-<option value="4500">Rolls-Royce Silver Cloud III 1965 (4 500 ₴/год)</option></select>
+          <select id="calc-car" required aria-invalid="false" aria-describedby="calc-car-error" class="w-full bg-brand-secondary border border-brand-border rounded-xl px-4 py-2.5 text-sm text-brand-text focus:outline-none focus:border-brand-emerald"><option value="Ford Mustang 1967">Ford Mustang 1967 (2 900 ₴/год)</option>
+<option value="Dodge Charger 1969">Dodge Charger 1969 (3 200 ₴/год)</option>
+<option value="Volkswagen Beetle 1972">Volkswagen Beetle 1972 (1 500 ₴/год)</option>
+<option value="Mercedes-Benz 300 SL Gullwing 1954">Mercedes-Benz 300 SL Gullwing 1954 (3 800 ₴/год)</option>
+<option value="Jaguar E-Type Series 1 1961">Jaguar E-Type Series 1 1961 (3 400 ₴/год)</option>
+<option value="Rolls-Royce Silver Cloud III 1965">Rolls-Royce Silver Cloud III 1965 (4 500 ₴/год)</option></select>
+          <p id="calc-car-error" class="field-feedback field-error" aria-live="polite"></p>
         </div>
 
         <div>
-          <div class="flex items-center justify-between mb-1.5">
-            <label for="calc-hours" class="text-xs font-semibold uppercase text-brand-muted">Кількість годин</label>
-            <span id="calc-hours-val" class="text-sm font-bold text-brand-emerald">3 год</span>
-          </div>
-          <input type="range" id="calc-hours" min="2" max="12" value="3" class="w-full accent-brand-emerald cursor-pointer">
+          <label for="calc-hours" class="block text-xs font-semibold uppercase text-brand-muted mb-1.5">Тривалість оренди, годин</label>
+          <input type="number" id="calc-hours" min="2" max="12" step="1" value="3" required inputmode="numeric"
+                 class="field" aria-invalid="false" aria-describedby="calc-hours-hint calc-hours-error">
+          <p id="calc-hours-hint" class="mt-1.5 text-xs text-brand-muted">Від 2 до 12 годин.</p>
+          <p id="calc-hours-error" class="field-feedback field-error" aria-live="polite"></p>
         </div>
 
         <div class="space-y-2 pt-2">
@@ -512,12 +514,12 @@
           </label>
         </div>
 
-        <div class="p-4 rounded-2xl bg-brand-secondary border border-brand-border flex items-center justify-between mt-4">
+        <div class="p-4 rounded-2xl bg-brand-secondary border border-brand-border flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mt-4">
           <div>
             <span class="block text-xs uppercase text-brand-muted">Орієнтовна вартість:</span>
-            <span id="calc-total" class="font-serif text-2xl sm:text-3xl font-bold text-brand-emerald">12 900 ₴</span>
+            <output id="calc-total" for="calc-car calc-hours calc-driver calc-decor" aria-live="polite" class="font-serif text-2xl sm:text-3xl font-bold text-brand-emerald">—</output>
           </div>
-          <button type="button" id="calc-book-action" class="px-5 py-2.5 rounded-xl bg-brand-emerald hover:bg-brand-emerald-light text-brand-dark font-semibold text-xs transition-colors">
+          <button type="button" id="calc-book-action" disabled class="px-5 py-2.5 rounded-xl bg-brand-emerald hover:bg-brand-emerald-light text-brand-dark font-semibold text-xs transition-colors disabled:cursor-not-allowed disabled:opacity-50">
             Забронювати за цим тарифом
           </button>
         </div>
@@ -686,57 +688,23 @@
         }
       });
 
-      // 4. Calculator Logic
-      const calcCar = document.getElementById('calc-car');
-      const calcHours = document.getElementById('calc-hours');
-      const calcHoursVal = document.getElementById('calc-hours-val');
-      const calcDriver = document.getElementById('calc-driver');
-      const calcDecor = document.getElementById('calc-decor');
-      const calcTotal = document.getElementById('calc-total');
-      const calcBookAction = document.getElementById('calc-book-action');
+      // 4. Transfer a validated quote to the existing booking form.
+      calculatorModal.addEventListener('rental:quoted', ({ detail }) => {
+        const bookingSection = document.getElementById('booking');
+        const bookingCar = document.getElementById('car-select');
+        const bookingDuration = document.getElementById('booking-duration');
+        if (!bookingSection || !bookingCar || !bookingDuration) return;
 
-      function calculateTotal() {
-        const baseRate = parseInt(calcCar.value, 10);
-        const hours = parseInt(calcHours.value, 10);
-        const driverCost = calcDriver.checked ? 500 * hours : 0;
-        const decorCost = calcDecor.checked ? 1200 : 0;
-        const total = (baseRate * hours) + driverCost + decorCost;
-
-        calcHoursVal.textContent = `${hours} год`;
-        calcTotal.textContent = `${total.toLocaleString('uk-UA')} ₴`;
-      }
-
-      if (calcCar && calcHours && calcDriver && calcDecor) {
-        calcCar.addEventListener('change', calculateTotal);
-        calcHours.addEventListener('input', calculateTotal);
-        calcDriver.addEventListener('change', calculateTotal);
-        calcDecor.addEventListener('change', calculateTotal);
-        calculateTotal();
-      }
-
-      if (calcBookAction) {
-        calcBookAction.addEventListener('click', () => {
-          closeModal(calculatorModal);
-          const bookingSection = document.getElementById('booking');
-          const carSelect = document.getElementById('car-select');
-          const durationInput = document.getElementById('booking-duration');
-
-          if (carSelect) {
-            const selectedText = calcCar.options[calcCar.selectedIndex].text.split(' (')[0];
-            for (let option of carSelect.options) {
-              if (option.text.includes(selectedText)) {
-                carSelect.value = option.value;
-                break;
-              }
-            }
-          }
-          if (durationInput) durationInput.value = calcHours.value;
-
-          bookingSection.scrollIntoView({ behavior: 'smooth' });
-          bookingSection.classList.add('form-highlight-pulse');
-          setTimeout(() => bookingSection.classList.remove('form-highlight-pulse'), 1500);
-        });
-      }
+        bookingCar.value = detail.car;
+        bookingDuration.value = detail.hours;
+        bookingDuration.dispatchEvent(new Event('input', { bubbles: true }));
+        closeModal(calculatorModal);
+        bookingDuration.focus({ preventScroll: true });
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        bookingSection.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth' });
+        bookingSection.classList.add('form-highlight-pulse');
+        setTimeout(() => bookingSection.classList.remove('form-highlight-pulse'), 1500);
+      });
 
       // 5. Calendar: local dates and demo availability (no server connected).
       const calendarApplyBtn = document.getElementById('calendar-apply-btn');
