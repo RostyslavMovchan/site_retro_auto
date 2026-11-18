@@ -467,10 +467,3 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 .media-facade:hover { color: #6ee7b7; }
 .media-facade:focus-visible { outline-offset: -5px; }
-
-/* РГР: поточний розділ у меню та відступ для прямих посилань на правила. */
-.mobile-nav-link[aria-current="page"] {
-  color: var(--color-accent);
-  background: var(--color-surface);
-}
-[data-view] details[id] { scroll-margin-top: 7rem; }

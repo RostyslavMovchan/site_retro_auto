@@ -6,7 +6,6 @@
       const heroVideoToggle = document.getElementById('hero-video-toggle');
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       let autoplayTimer;
-      let videoPausedByUser = false;
 
       function syncHeroVideoControl() {
         const label = heroVideo.paused ? 'Відтворити відео' : 'Пауза відео';
@@ -21,10 +20,10 @@
       }
 
       function scheduleHeroVideo() {
-        if (videoPausedByUser || reducedMotion.matches || navigator.connection?.saveData
+        if (reducedMotion.matches || navigator.connection?.saveData
             || !window.matchMedia('(min-width: 768px)').matches) return;
         autoplayTimer = setTimeout(() => {
-          if (!reducedMotion.matches && heroVideo.paused
+          if (!reducedMotion.matches && !heroVideo.hasAttribute('src')
               && heroVideo.getBoundingClientRect().bottom > 0) playHeroVideo();
         }, 1800);
       }
@@ -33,9 +32,8 @@
       heroVideo.addEventListener('pause', syncHeroVideoControl);
       heroVideoToggle.addEventListener('click', () => {
         clearTimeout(autoplayTimer);
-        videoPausedByUser = !heroVideo.paused;
-        if (videoPausedByUser) heroVideo.pause();
-        else playHeroVideo();
+        if (heroVideo.paused) playHeroVideo();
+        else heroVideo.pause();
       });
       if (document.readyState === 'complete') scheduleHeroVideo();
       else window.addEventListener('load', scheduleHeroVideo, { once: true });
@@ -43,11 +41,6 @@
         clearTimeout(autoplayTimer);
         if (reducedMotion.matches) heroVideo.pause();
         else scheduleHeroVideo();
-      });
-      document.addEventListener('retro:view-change', ({ detail }) => {
-        clearTimeout(autoplayTimer);
-        if (detail.view === 'home') scheduleHeroVideo();
-        else heroVideo.pause();
       });
       syncHeroVideoControl();
 
@@ -89,6 +82,32 @@
           }
         });
       });
+
+      // 2. Dynamic ScrollSpy: Підсвічування активного пункту навігації
+      const sections = document.querySelectorAll('section[id], footer[id]');
+      const navLinks = document.querySelectorAll('nav a.nav-link');
+
+      function updateActiveNav() {
+        const scrollPosition = window.scrollY + 120;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveNav, { passive: true });
+      updateActiveNav();
 
       // 3. Modals Management (Calendar & Calculator)
       const calendarModal = document.getElementById('calendar-modal');
@@ -158,12 +177,6 @@
         }
       });
 
-      function openBooking(field) {
-        document.dispatchEvent(new CustomEvent('retro:navigate', {
-          detail: { anchor: 'booking', focus: field },
-        }));
-      }
-
       // 4. Transfer a validated quote to the existing booking form.
       calculatorModal.addEventListener('rental:quoted', ({ detail }) => {
         const bookingSection = document.getElementById('booking');
@@ -175,7 +188,9 @@
         bookingDuration.value = detail.hours;
         bookingDuration.dispatchEvent(new Event('input', { bubbles: true }));
         closeModal(calculatorModal);
-        openBooking(bookingDuration);
+        bookingDuration.focus({ preventScroll: true });
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        bookingSection.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth' });
         bookingSection.classList.add('form-highlight-pulse');
         setTimeout(() => bookingSection.classList.remove('form-highlight-pulse'), 1500);
       });
@@ -257,7 +272,9 @@
           }
           bookingDate.value = calendarDateInput.value;
           closeModal(calendarModal);
-          openBooking(bookingDate);
+          const bookingSection = document.getElementById('booking');
+          bookingSection.scrollIntoView({ behavior: 'smooth' });
+          bookingDate.focus({ preventScroll: true });
         });
       }
 
